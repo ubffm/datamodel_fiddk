@@ -89,6 +89,15 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 ![CHO_3](images/CHO_3.png)
 ![CHO_4](images/CHO_4.png)
 
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
+- FIDDK modelliert Inszenierungen/Produktionen/Werke als abstrakte ProvidedCHO und kennzeichnet sie über dc:type.
+- FIDDK nutzt die optionalen EDM-Properties dc:date, dcterms:conformsTo und edm:hasType nicht; stattdessen werden dcterms:created, dcterms:issued oder dcterms:temporal verwendet.
+- dc:title ist im FIDDK auf max. 1 pro CHO beschränkt; zusätzliche Titel/Übersetzungen werden über dcterms:alternative modelliert.
+- Sprachangaben: FIDDK verwendet bevorzugt ISO 639-1 (xml:lang), während EDM ISO 639-2/-3 empfiehlt.
+- edm:isRelatedTo wird im FIDDK in der Praxis auf Konzepte/Literale beschränkt; generische Verweise werden vermieden.
+- Datumsangaben werden als Zeitspannen im Solr/ISO-Subset dargestellt; Unsicherheiten zusätzlich über rdfs:label (siehe Abschnitt „Datumsformatierung“ und „Modellierung von Unsicherheit“).
+- Erweiterungen durch bibo/bf/rdau für Identifikatoren und Rollen, die in EDM nicht vorhanden sind (siehe Abschnitt „Zusätzliche ProvidedCHO Properties im FIDDK“).
+
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note | Display German | Display English |
 |-----------|------------|-------------|---------------------|------------|----------------|-----------------|
 | dc:contributor | literal or reference to Agent | min 0, max unbounded | Verwenden für Beitragende zum CHO. Wenn möglich, die Kennung der beitragenden Person aus einer Normdatenquelle angeben. Anbieter mit differenzierteren Rollentypen können einen Teil auf dc:contributor und andere auf dc:creator abbilden. Für mehrere Beitragende wiederholen. <dc:contributor>Maria Callas</dc:contributor> oder als Referenz auf eine Instanz der Agent-Klasse <dc:contributor rdf:resource="http://www.example.com/MariaCallas"/> | Beitragende; allgemeinste Tätigkeitsform; Nutzung im FIDDK, wenn sonst nichts zutrifft | Beitragender | Contributor |
@@ -98,13 +107,13 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 | dc:description | literal or reference | min 0, max unbounded - entweder dc:description oder dc:title ist verpflichtend | Eine Beschreibung des CHO. Wenn kein dc:description vorhanden ist, muss ein dc:title existieren. Wenn beide vorhanden sind, sollen beide angegeben werden. <dc:description>Illustrated guide ...</dc:description> | Beschreibung … | Beschreibung | Description |
 | dc:format | literal or reference to Concept | min 0, max unbounded | Begriff(e) zur Angabe des Formats des CHO oder Dateiformats eines digitalen Objekts. Bei Bedarf „3D-PDF“ verwenden. <dc:format>paper</dc:format> | Format im Sinne von Dateiformat … | - | - |
 | dc:identifier | literal | min 0, max unbounded | Eine Kennung des originalen CHO. <dc:identifier>RP-T-1952-380</dc:identifier> | Jegliche Art … | - | - |
-| dc:language | literal | min 0, max unbounded | Sprache des CHO bzw. sprachbezogener Inhalte. Pflicht für TEXT-Objekte. ISO-639-Codes empfohlen. Wiederholbar für mehrere Sprachen. Empfehlung: zxx für nichtsprachliche Inhalte. | Sprache … | Sprache | Language |
+| dc:language | literal | min 0, max unbounded | Sprache des CHO bzw. sprachbezogener Inhalte. Pflicht für TEXT-Objekte. ISO-639-Codes empfohlen. Wiederholbar für mehrere Sprachen. Empfehlung: zxx für nichtsprachliche Inhalte. | Abweichung zu EDM: FIDDK verwendet bevorzugt ISO 639-1 (xml:lang und Sprachwerte), während EDM ISO 639-2/-3 empfiehlt. | Sprache | Language |
 | dc:publisher | literal or reference to Agent | min 0, max unbounded | Der Name des Verlags. Wenn möglich, Normdatenkennungen verwenden. <dc:publisher>Oxford University Press</dc:publisher> | Verlag | an erster Stelle innerhalb von Erschienen | first position of Published |
 | dc:relation | literal or reference to CHO | min 0, max unbounded | Name oder Kennung einer verwandten Ressource, meist eines anderen CHO. Vgl. edm:isRelatedTo. <dc:relation>maps.crace.1/33</dc:relation> oder Referenz. | Generelle Verlinkung ähnlicher Objekte … | | |
 | dc:rights | literal or reference | min 0, max unbounded | Angaben zu Rechteinhaber*in oder allgemeinen Rechten. (Hinweis: edm:rights betrifft digitale Objekte.) <dc:rights>Copyright © …</dc:rights> | Rechteangaben … | Rechteangaben | Rights Statement |
 | dc:source | literal or reference to CHO | min 0, max unbounded | Eine Ressource, aus der das CHO vollständig oder teilweise hervorgeht. Nicht der Datengeber! <dc:source>Security Magazine ...</dc:source> | Quellenangabe … | | |
 | dc:subject | literal or reference to Agent/Concept/Event/Place | min 0, max unbounded | Das Thema des CHO. Mindestens eines von: dc:subject, dc:type, dcterms:spatial, dcterms:temporal. Hochstufige Schlagworte erlaubt. <dc:subject>trombone</dc:subject> oder Referenz. | Schlagwort / Topic … | | |
-| dc:title | literal | min 0, max 1 | Titel des CHO. Verpflichtend, außer es existiert kein Titel, dann genügt dc:description. Verschiedene Sprachversionen mit xml:lang. | Titel … | | |
+| dc:title | literal | min 0, max 1 | Titel des CHO. Verpflichtend, außer es existiert kein Titel, dann genügt dc:description. Verschiedene Sprachversionen mit xml:lang. | Abweichung zu EDM: Im FIDDK max. 1 Titel pro CHO; weitere Titel/Übersetzungen über dcterms:alternative. | | |
 | dc:type | literal or reference to Concept | min 0, max unbounded | Art oder Genre des CHO. Idealerweise aus kontrolliertem Vokabular. Nicht identisch zu edm:type. <dc:type>Book</dc:type> | Objektart … | | |
 | dcterms:alternative | literal | min 0, max unbounded | Alternativer Titel inkl. Übersetzungen oder Abkürzungen. <dcterms:alternative>Eight weeks ...</dcterms:alternative> | Alternative Titel … | | |
 | ~~dcterms:conformsTo~~ | ~~literal or reference~~ | ~~min 0, max unbounded~~ | ~~Standard, dem das CHO entspricht.~~ | … | | |
@@ -139,7 +148,7 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 | edm:isSimilarTo | reference to CHO | min 0, max unbounded | Ähnliches CHO. | Referenz auf ähnliches CHO | | |
 | edm:isSuccessorOf | reference to CHO | min 0, max unbounded | Vorgängerobjekt, zu dem das CHO eine Fortsetzung bildet. | Nachfolger/Fortsetzung … | | |
 | edm:realizes | reference to abstract CHO | min 0, max unbounded | Physisches CHO realisiert ein abstraktes Informationsobjekt. | Referenz auf abstraktes Objekt … | | |
-| edm:type | literal | min 1, max 1 | Muss einer der Europeana-Typen sein (TEXT, VIDEO, SOUND, IMAGE, 3D). | EDM-Typ … | | |
+| edm:type | literal | min 1, max 1 | Muss einer der Europeana-Typen sein (TEXT, VIDEO, SOUND, IMAGE, 3D). | Großschreibung (case-sensitive) gemäß EDM; FIDDK folgt der Vorgabe. | | |
 | edm:wasPresentAt | reference to Event | min 0, max unbounded | CHO war bei einem Ereignis präsent/assoziiert. | Referenz zu Event … | | |
 | owl:sameAs | reference | min 0, max unbounded | Verweis auf andere Linked-Data-Repräsentation desselben Objekts. | Link zu anderer URI … | | |
 | rdf:type | reference | min 0, max unbounded | — | — | | |
