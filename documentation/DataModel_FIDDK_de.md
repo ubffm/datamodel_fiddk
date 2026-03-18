@@ -43,7 +43,7 @@
 
 ## Allgemeines
 - Nachnutzung des Metadatenstandards [EDM (Europeana Data Model)](https://pro.europeana.eu/page/edm-documentation) + universell (GLAM) + erweiterbar + flexibel + RDF basiert
-- dieses Application Profile basiert auf der Originaldokumentation von [EDM](https://pro.europeana.eu/page/edm-documentation) entsprechend der [Mapping Guidelines](https://pro.europeana.eu/files/Europeana_Professional/Share_your_data/Technical_requirements/EDM_Documentation/EDM_Mapping_Guidelines_v2.4_102017.pdf), der [EDM Object Templates](https://github.com/europeana/corelib/wiki/EDMObjectTemplatesProviders) und des [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
+- dieses Application Profile basiert auf der Originaldokumentation von [EDM](https://pro.europeana.eu/page/edm-documentation) entsprechend der [Mapping Guidelines](https://europeana.atlassian.net/wiki/spaces/EF/pages/987791389/EDM+-+Mapping+guidelines), der [EDM Object Templates](https://github.com/europeana/corelib/wiki/EDMObjectTemplatesProviders) und des [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
 - die Daten liegen im FIDDK als `RDF/XML` vor
 - im Folgenden eine Übersicht über EDM, seine Klassen und Properties sowie
 Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **fett** markiert bzw ~~durchgestrichen~~)
@@ -139,7 +139,7 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 | edm:isSimilarTo | reference to CHO | min 0, max unbounded | Ähnliches CHO. | Referenz auf ähnliches CHO | | |
 | edm:isSuccessorOf | reference to CHO | min 0, max unbounded | Vorgängerobjekt, zu dem das CHO eine Fortsetzung bildet. | Nachfolger/Fortsetzung … | | |
 | edm:realizes | reference to abstract CHO | min 0, max unbounded | Physisches CHO realisiert ein abstraktes Informationsobjekt. | Referenz auf abstraktes Objekt … | | |
-| edm:type | literal | min 0, max 1 | Muss einer der Europeana-Typen sein (TEXT, VIDEO, SOUND, IMAGE, 3D). | EDM-Typ … | | |
+| edm:type | literal | min 1, max 1 | Muss einer der Europeana-Typen sein (TEXT, VIDEO, SOUND, IMAGE, 3D). | EDM-Typ … | | |
 | edm:wasPresentAt | reference to Event | min 0, max unbounded | CHO war bei einem Ereignis präsent/assoziiert. | Referenz zu Event … | | |
 | owl:sameAs | reference | min 0, max unbounded | Verweis auf andere Linked-Data-Repräsentation desselben Objekts. | Link zu anderer URI … | | |
 | rdf:type | reference | min 0, max unbounded | — | — | | |
