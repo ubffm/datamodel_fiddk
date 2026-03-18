@@ -105,7 +105,7 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 | dc:source | literal or reference to CHO | min 0, max unbounded | Eine Ressource, aus der das CHO vollständig oder teilweise hervorgeht. Nicht der Datengeber! <dc:source>Security Magazine ...</dc:source> | Quellenangabe … | | |
 | dc:subject | literal or reference to Agent/Concept/Event/Place | min 0, max unbounded | Das Thema des CHO. Mindestens eines von: dc:subject, dc:type, dcterms:spatial, dcterms:temporal. Hochstufige Schlagworte erlaubt. <dc:subject>trombone</dc:subject> oder Referenz. | Schlagwort / Topic … | | |
 | dc:title | literal | min 0, max 1 | Titel des CHO. Verpflichtend, außer es existiert kein Titel, dann genügt dc:description. Verschiedene Sprachversionen mit xml:lang. | Titel … | | |
-| dc:type | literal or reference to Concept | min 1, max unbounded | Art oder Genre des CHO. Idealerweise aus kontrolliertem Vokabular. Nicht identisch zu edm:type. <dc:type>Book</dc:type> | Objektart … | | |
+| dc:type | literal or reference to Concept | min 0, max unbounded | Art oder Genre des CHO. Idealerweise aus kontrolliertem Vokabular. Nicht identisch zu edm:type. <dc:type>Book</dc:type> | Objektart … | | |
 | dcterms:alternative | literal | min 0, max unbounded | Alternativer Titel inkl. Übersetzungen oder Abkürzungen. <dcterms:alternative>Eight weeks ...</dcterms:alternative> | Alternative Titel … | | |
 | ~~dcterms:conformsTo~~ | ~~literal or reference~~ | ~~min 0, max unbounded~~ | ~~Standard, dem das CHO entspricht.~~ | … | | |
 | dcterms:created | literal or reference to Timespan | min 0, max unbounded | Datum der Erstellung/Herstellung des CHO. ISO-8601 empfohlen. Andere Datums-Properties können geeigneter sein. | Datum der Erstellung … | | |
