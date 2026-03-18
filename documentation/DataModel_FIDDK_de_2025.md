@@ -128,7 +128,7 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 | dcterms:spatial | literal or reference to Place | min 0, max unbounded | Räumliche Eigenschaften des CHO, z. B. dargestellter Ort. Nicht zu verwechseln mit edm:currentLocation. | Allgemeine Ortsangabe … | | |
 | dcterms:tableOfContents | literal or reference | min 0, max unbounded | Liste der Untereinheiten des CHO. | Inhaltsverzeichnis … | | |
 | dcterms:temporal | literal or reference to Timespan | min 0, max unbounded | Zeitliche Eigenschaften des CHO, z. B. Epoche. | Allgemeine Datumsangabe … | | |
-| edm:currentLocation | literal or reference | min 1 | Aktueller physischer Standort des CHO. Nicht zu verwechseln mit dcterms:spatial. | Aktueller Standort … | | |
+| edm:currentLocation | literal or reference | min 0, max 1 | Aktueller physischer Standort des CHO. Nicht zu verwechseln mit dcterms:spatial. | Aktueller Standort … | | |
 | edm:hasMet | reference to Agent/Event/Place/Timespan | min 0, max unbounded | Identifikator für Entitäten, denen das CHO „begegnet“ ist. | Generische Beziehungen … | | |
 | ~~edm:hasType~~ | ~~reference or literal~~ | ~~min 0, max unbounded~~ | ~~Übergeordnete Typangabe des CHO (z. B. Painting).~~ | … | | |
 | edm:incorporates | reference to CHO | min 0, max unbounded | Identifikator einer Ressource, die im CHO enthalten ist. | Referenz auf integriertes CHO … | | |
