@@ -25,6 +25,7 @@ fiddk-validate = "fiddk_validater.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/fiddk_validater"]
+include = ["src/fiddk_validater/shapes/**"]
 
 [tool.ruff]
 line-length = 100

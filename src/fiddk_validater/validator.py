@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from importlib import resources
 from pathlib import Path
 
 from pyshacl import validate as shacl_validate
@@ -20,7 +21,7 @@ def _resolve_format(path: Pathish, provided: str | None) -> str | None:
 
 def validate(
   data_path: Pathish,
-  shacl_path: Pathish,
+  shacl_path: Pathish | None = None,
   data_format: str | None = None,
   shacl_format: str | None = None,
   inference: str = "rdfs",
@@ -31,7 +32,31 @@ def validate(
   data_graph.parse(str(data_path), format=_resolve_format(data_path, data_format))
 
   shacl_graph = Graph()
-  shacl_graph.parse(str(shacl_path), format=_resolve_format(shacl_path, shacl_format))
+  if shacl_path is None:
+    shapes_dir = resources.files("fiddk_validater").joinpath("shapes")
+    loaded = False
+    if shapes_dir.is_dir():
+      for entry in shapes_dir.iterdir():
+        if entry.is_file():
+          fmt = rdflib_guess_format(entry.name) or "turtle"
+          shacl_graph.parse(data=entry.read_text(encoding="utf-8"), format=fmt)
+          loaded = True
+    else:
+      entry = resources.files("fiddk_validater").joinpath("shapes").joinpath("fiddk.ttl")
+      if entry.is_file():
+        shacl_graph.parse(data=entry.read_text(encoding="utf-8"), format="turtle")
+        loaded = True
+    if not loaded:
+      raise FileNotFoundError("Eingepackte SHACL-Shapes wurden nicht gefunden.")
+  else:
+    spath = Path(shacl_path)
+    if spath.is_dir():
+      for entry in spath.iterdir():
+        if entry.is_file():
+          fmt = _resolve_format(entry, shacl_format) or rdflib_guess_format(entry.name) or "turtle"
+          shacl_graph.parse(str(entry), format=fmt)
+    else:
+      shacl_graph.parse(str(spath), format=_resolve_format(spath, shacl_format))
 
   conforms, results_graph, results_text = shacl_validate(
     data_graph=data_graph,

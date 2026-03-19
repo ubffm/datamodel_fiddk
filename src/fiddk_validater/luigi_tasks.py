@@ -9,7 +9,7 @@ from .validator import _resolve_format, validate
 
 class ValidateRDFTask(luigi.Task):
   data_path = luigi.Parameter()
-  shacl_path = luigi.Parameter(default="fiddk.ttl")
+  shacl_path = luigi.OptionalParameter(default=None)
   report_path = luigi.Parameter()
   data_format = luigi.OptionalParameter(default=None)
   shacl_format = luigi.OptionalParameter(default=None)
