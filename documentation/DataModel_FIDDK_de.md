@@ -57,7 +57,7 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 ## Namespaces
 - `dc`: http://purl.org/dc/elements/1.1/
 - `dcterms`: http://purl.org/dc/terms/
-- `edm`: http://www.europeana.eu/schemas/edm/
+- `edm`: https://www.europeana.eu/schemas/edm/
 - `ore`: http://www.openarchives.org/ore/terms/
 - `owl`: http://www.w3.org/2002/07/owl#
 - `rdf`: http://www.w3.org/1999/02/22-rdf-syntax-ns#
