@@ -1,0 +1,37 @@
+[build-system]
+requires = ["hatchling>=1.20"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fiddk_validater"
+version = "0.1.0"
+description = "Validierung von FID RDF-Daten (pySHACL) inkl. Luigi-Task und CLI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "FID", email = "info@example.org" }]
+dependencies = [
+  "rdflib>=6.2",
+  "pyshacl>=0.24",
+  "luigi>=3.4",
+]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.4.0"]
+
+[project.scripts]
+fiddk-validate = "fiddk_validater.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [{ include = "fiddk_validater", from = "src" }]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E203", "W503"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["fiddk_validater"]

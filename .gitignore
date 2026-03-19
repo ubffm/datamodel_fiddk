@@ -1,2 +1,9 @@
 .aider*
 tmp/
+.venv/
+.ruff_cache/
+__pycache__/
+*.egg-info/
+dist/
+build/
+uv.lock
