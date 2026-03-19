@@ -1,4 +1,4 @@
-# Datenmodell FID DK - Application Profile EDM
+# Datenmodell FIDDK - Application Profile EDM
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
@@ -46,7 +46,7 @@
 - dieses Application Profile basiert auf der Originaldokumentation von [EDM](https://pro.europeana.eu/page/edm-documentation) entsprechend der [Mapping Guidelines](https://europeana.atlassian.net/wiki/spaces/EF/pages/987791389/EDM+-+Mapping+guidelines), der [EDM Object Templates](https://github.com/europeana/corelib/wiki/EDMObjectTemplatesProviders) und des [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
 - die Daten liegen im FIDDK als `RDF/XML` vor
 - im Folgenden eine Übersicht über EDM, seine Klassen und Properties sowie
-Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **fett** markiert bzw ~~durchgestrichen~~)
+Hinweise zu den Änderungen im FIDDK (Application Profile, Änderungen sind **fett** markiert bzw ~~durchgestrichen~~)
 - Nicht alles, das nicht durchgestrichen ist, wird auch tatsächlich genutzt. Teilweise wurde es nur noch nicht implementiert oder es kam noch nicht vor.
 - FIDDK Note dient nur der Erklärung und entspricht nicht zwingend der Anzeige im FID Portal.
 - :warning: Dies ist ein Draft und kann sich noch ändern
@@ -57,12 +57,12 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 - `edm`: http://www.europeana.eu/schemas/edm/
 - `ore`: http://www.openarchives.org/ore/terms/
 - `owl`: http://www.w3.org/2002/07/owl#
-- `rdf`: http://www.w3.org/1999/02/22-­rdf-­syntax-­ns#
+- `rdf`: http://www.w3.org/1999/02/22-rdf-syntax-ns#
 - `foaf`: http://xmlns.com/foaf/0.1/
 - `skos`: http://www.w3.org/2004/02/skos/core#
 - `rdau`: http://rdaregistry.info/Elements/u/
 - `wgs84_pos`: http://www.w3.org/2003/01/geo/wgs84_pos#
-- `crm`: http://www.cidoc-­crm.org/cidoc-­crm/
+- `crm`: http://www.cidoc-crm.org/cidoc-crm/
 - `cc`: http://creativecommons.org/ns#
 
 ### Zusätzliche Namespaces im FIDDK
@@ -78,7 +78,7 @@ Der DM2E Namespace ist über den Link http://onto.dm2e.eu/schemas/dm2e/ nicht me
 
 ### edm:ProvidedCHO
 Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie z.B. Buch, Programmheft, Grafik, Fotografie, Kostüm, Theaterzettel, Plakat, Video, Brief, ...). Es steht im Gegensatz zur `edm:WebResource`, die eine digitale Repräsentation des physischen Objekts abbildet.
-- Im FID DK kann das CHO auch abstrakt sein, da es in EDM keine Klasse für das Werk oder die Produktion gibt. So werden im FIDDK Inszenierungsbeschreibungen, Produktionen und Werke ebenfalls als `edm:ProvidedCHO` abgebildet und über `dc:type` als solche gekennzeichnet.
+- Im FIDDK kann das CHO auch abstrakt sein, da es in EDM keine Klasse für das Werk oder die Produktion gibt. So werden im FIDDK Inszenierungsbeschreibungen, Produktionen und Werke ebenfalls als `edm:ProvidedCHO` abgebildet und über `dc:type` als solche gekennzeichnet.
 - Bei Angaben zu Personen, die mit dem Provided CHO in Verbindung stehen, soll bevorzugt auf Normdaten in `foaf:Person` oder `foaf:Organization` verlinkt werden und ein Literal nur benutzt werden, wenn keine Normdaten vorhanden sind.
 - Sprachangaben für textuelle Angaben wie z.B. bei `dc:description` werden dem XML Standard entsprechend als Attribut `@xml:lang` mit *ISO 639-1* angegeben, s. https://www.w3.org/TR/REC-xml/#sec-lang-tag bzw. https://tools.ietf.org/html/rfc4646#section-2.2.1  
 - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
@@ -94,7 +94,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 - dc:title ist im FIDDK auf max. 1 pro CHO beschränkt; zusätzliche Titel/Übersetzungen werden über dcterms:alternative modelliert.
 - Sprachangaben: FIDDK verwendet bevorzugt ISO 639-1 (xml:lang), während EDM ISO 639-2/-3 empfiehlt.
 - edm:isRelatedTo wird im FIDDK in der Praxis auf Konzepte/Literale beschränkt; generische Verweise werden vermieden.
-- Datumsangaben werden als Zeitspannen im Solr/ISO-Subset dargestellt; Unsicherheiten zusätzlich über rdfs:label (siehe Abschnitt „Datumsformatierung“ und „Modellierung von Unsicherheit“).
+- Datumsangaben werden über `edm:TimeSpan` modelliert (`edm:begin`/`edm:end`); menschenlesbare Anzeigeformen über `skos:prefLabel`; kein `rdfs:label` an Properties.
 - Erweiterungen durch bibo/bf/rdau für Identifikatoren und Rollen, die in EDM nicht vorhanden sind (siehe Abschnitt „Zusätzliche ProvidedCHO Properties im FIDDK“).
 
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note | Display German | Display English |
@@ -137,7 +137,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | dcterms:tableOfContents | literal or reference | min 0, max unbounded | Liste der Untereinheiten des CHO. | Inhaltsverzeichnis … | | |
 | dcterms:temporal | literal or reference to TimeSpan | min 0, max unbounded | Zeitliche Eigenschaften des CHO, z. B. Epoche. | Allgemeine Datumsangabe … | | |
 | edm:currentLocation | literal or reference | min 0, max 1 | Aktueller physischer Standort des CHO. Nicht zu verwechseln mit dcterms:spatial. | Aktueller Standort … | | |
-| edm:hasMet | reference to Agent/Event/Place/Timespan | min 0, max unbounded | Identifikator für Entitäten, denen das CHO „begegnet“ ist. | Generische Beziehungen … | | |
+| edm:hasMet | reference to Agent/Event/Place/TimeSpan | min 0, max unbounded | Identifikator für Entitäten, denen das CHO „begegnet“ ist. | Generische Beziehungen … | | |
 | ~~edm:hasType~~ | ~~reference or literal~~ | ~~min 0, max unbounded~~ | ~~Übergeordnete Typangabe des CHO (z. B. Painting).~~ | … | | |
 | edm:incorporates | reference to CHO | min 0, max unbounded | Identifikator einer Ressource, die im CHO enthalten ist. | Referenz auf integriertes CHO … | | |
 | edm:isDerivativeOf | reference to CHO | min 0, max unbounded | Identifikator der Ressource, von der das CHO abgeleitet ist. | Referenz auf Derivat … | | |
@@ -148,7 +148,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | edm:isSuccessorOf | reference to CHO | min 0, max unbounded | Vorgängerobjekt, zu dem das CHO eine Fortsetzung bildet. | Nachfolger/Fortsetzung … | | |
 | edm:realizes | reference to abstract CHO | min 0, max unbounded | Physisches CHO realisiert ein abstraktes Informationsobjekt. | Referenz auf abstraktes Objekt … | | |
 | edm:type | literal | min 1, max 1 | Muss einer der Europeana-Typen sein (TEXT, VIDEO, SOUND, IMAGE, 3D). | Großschreibung (case-sensitive) gemäß EDM; FIDDK folgt der Vorgabe. | | |
-| edm:wasPresentAt | reference to Event | min 0, max unbounded | CHO war bei einem Ereignis präsent/assoziiert. | Referenz zu Event … | | |
+| edm:wasPresentAt | reference to Event | min 0, max unbounded | CHO war bei einem Ereignis präsent/assoziiert. | Referenz zu Event … (FIDDK-Erweiterung) | | |
 | owl:sameAs | reference | min 0, max unbounded | Verweis auf andere Linked-Data-Repräsentation desselben Objekts. | Link zu anderer URI … | | |
 | rdf:type | reference | min 0, max unbounded | — | — | | |
 
@@ -168,7 +168,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | `bf:subtitle` | literal | min 0, max unbounded | Wort/Zeichenfolge, die den Titel nach dem Haupttitel ergänzt; möglicher Titelbestandteil. | Untertitel, Titelzusätze; nicht Film-Untertitel |
 | `rdau:P60062` | literal or reference to Agent | min 0, max unbounded | „hat Produktionsfirma“ – Bezieht eine Ressource auf eine Organisation/Person, die für finanzielle, technische und organisatorische Aspekte einer Produktion (Theater, Film, Tonaufnahme, TV, Webcast etc.) verantwortlich ist. | Produktionsfirma (Theater/Film/…) |
 | `rdau:P60066` | literal or reference to Agent | min 0, max unbounded | „hat Sammler“ – Bezieht eine Ressource auf eine Person, die Materialien aus verschiedenen Quellen zu einer Sammlung zusammenführt, ordnet oder katalogisiert. | Sammler_in (nicht Kurator_in → siehe `rdau:P60376`) |
-| `rdau:P60074` | literal or reference to Timespan | min 0, max unbounded | „hat Aufnahmedatum“ – Bezieht eine Ressource auf einen Zeitraum, in dem der Inhalt aufgenommen oder gefilmt wurde. | Aufnahmedatum bei Mitschnitten (Audio/Video) |
+| `rdau:P60074` | literal or reference to TimeSpan | min 0, max unbounded | „hat Aufnahmedatum“ – Bezieht eine Ressource auf einen Zeitraum, in dem der Inhalt aufgenommen oder gefilmt wurde. | Aufnahmedatum bei Mitschnitten (Audio/Video) |
 | `rdau:P60091` | literal or reference to Agent | min 0, max unbounded | „hat Spender/Geber“ – Bezieht eine Ressource auf eine frühere Besitzerperson, die sie einer anderen Person/Institution geschenkt/gespendet hat. | Geber_in / Spender_in / Schenkende Person |
 | `rdau:P60141` | literal or reference to Agent | min 0, max unbounded | „hat Dirigent“ – Bezieht eine Ressource auf eine aufführende Person, die ein Ensemble in einer musikalischen oder dramatischen Darbietung leitet. | Dirigent_in; nicht musikalische Leitung (siehe P60383) |
 | `rdau:P60142` | literal or reference to Agent | min 0, max unbounded | „hat Schauspieler“ – Bezieht eine Ressource auf eine aufführende Person, die als Darsteller*in in einer musikalischen oder dramatischen Präsentation mitwirkt. | Schauspieler_in / Darsteller_in |
@@ -299,7 +299,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (WebResource)
 - keine
 
 ## EDM Contextual Classes
-Die kontextuellen Klassen `edm:Agent`, `edm:Place`, `edm:Timespan`, `edm:Event` und `skos:Concept` beschreiben das *Wer?/Wo?/Wann?/Was?* eines `edm:ProvidedCHO`, sofern dies eindeutig in Form von Normdaten identifiziert werden kann und nicht nur als Literal angegeben ist.
+Die kontextuellen Klassen `edm:Agent`, `edm:Place`, `edm:TimeSpan`, `edm:Event` und `skos:Concept` beschreiben das *Wer?/Wo?/Wann?/Was?* eines `edm:ProvidedCHO`, sofern dies eindeutig in Form von Normdaten identifiziert werden kann und nicht nur als Literal angegeben ist.
 - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
 
 ### edm:Agent
@@ -324,7 +324,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
 | `skos:prefLabel` | literal | min 0, max 1 per lang tag | Die bevorzugte Namensform des Agenten. Obwohl die maximale Anzahl auf 1 gesetzt ist, gilt dies als 1 **pro Sprach-Tag**. Mindestens ein `skos:prefLabel` SOLLTE angegeben werden. Mehrere Labels mit Sprachkennzeichnung werden für Varianten und Übersetzungen dringend empfohlen. `<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` `<skos:prefLabel xml:lang="en">Courtois’ eldest nephew</skos:prefLabel>` | voller bevorzugter Name … |
 | `skos:altLabel` | literal | min 0, max unbounded | Alternative Namensformen des Agenten. Dieses Property wird empfohlen. `<skos:altLabel xml:lang="en">Courtois</skos:altLabel>` `<skos:altLabel xml:lang="fr">Augte. Courtois aîné</skos:altLabel>` | Namensvarianten; auch Pseudonyme … |
 | `skos:note` | literal | min 0, max unbounded | Eine Anmerkung zur Person, z. B. biografische Hinweise. `<skos:note>Courtois neveu aîné started a company ...</skos:note>` | `rdau:P60492` bevorzugt |
-| `dc:date` | literal or reference to Timespan | min 0, max unbounded | Ein bedeutendes Datum, das mit der Person assoziiert ist. Europeana empfiehlt ISO-8601-Format (YYYY-MM-DD). `<dc:date>1803</dc:date>` | Mit der Person assoziiertes Datum … |
+| `dc:date` | literal or reference to TimeSpan | min 0, max unbounded | Ein bedeutendes Datum, das mit der Person assoziiert ist. Europeana empfiehlt ISO-8601-Format (YYYY-MM-DD). `<dc:date>1803</dc:date>` | Mit der Person assoziiertes Datum … |
 | `dc:identifier` | literal | min 0, max unbounded | Eine Kennung der Person. `<dc:identifier>http://viaf.org/viaf/96994048</dc:identifier>` | Weitere lokale Identifier |
 | ~~`edm:begin`~~ | ~~literal~~ | ~~min 0, max 1~~ | ~~Geburtsdatum/Gründungsdatum der Person/Organisation. ISO-8601 empfohlen.~~ | … |
 | ~~`edm:end`~~ | ~~literal~~ | ~~min 0, max 1~~ | ~~Sterbe-/Enddatum der Person/Organisation. ISO-8601 empfohlen.~~ | … |
@@ -365,8 +365,8 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Organization)
 | `skos:altLabel` | literal | min 0, max unbounded | Alternative Namensformen der Körperschaft. Dieses Property wird empfohlen. `<skos:altLabel xml:lang="en">Courtois</skos:altLabel>` `<skos:altLabel xml:lang="fr">Augte. Courtois aîné</skos:altLabel>` | Namensvarianten; Sprachtag sofern bekannt |
 | `skos:note` | literal | min 0, max unbounded | Anmerkung über die Körperschaft, z. B. historische oder beschreibende Hinweise. `<skos:note>Courtois neveu aîné started a company ...</skos:note>` | Beschreibung der Körperschaft |
 | `dc:identifier` | literal | min 0, max unbounded | Eine Kennung der Körperschaft. `<dc:identifier>http://viaf.org/viaf/96994048</dc:identifier>` | Weitere lokale Identifier |
-| ~~`rdaGr2:dateOfEstablishment`~~ `rdau:P60524` | literal or reference to Timespan | min 0, max 1 | Datum der Gründung bzw. Etablierung der Körperschaft. ISO-8601-Datumsformat empfohlen. | Annex B folgend nach rdau gemappt … |
-| ~~`rdaGr2:dateOfTermination`~~ `rdau:P60525` | literal or reference to Timespan | min 0, max 1 | Datum der Auflösung bzw. Beendigung der Körperschaft. ISO-8601-Datumsformat empfohlen. | Annex B folgend nach rdau gemappt … |
+| ~~`rdaGr2:dateOfEstablishment`~~ `rdau:P60524` | literal or reference to TimeSpan | min 0, max 1 | Datum der Gründung bzw. Etablierung der Körperschaft. ISO-8601-Datumsformat empfohlen. | Annex B folgend nach rdau gemappt … |
+| ~~`rdaGr2:dateOfTermination`~~ `rdau:P60525` | literal or reference to TimeSpan | min 0, max 1 | Datum der Auflösung bzw. Beendigung der Körperschaft. ISO-8601-Datumsformat empfohlen. | Annex B folgend nach rdau gemappt … |
 | ~~`edm:acronym`~~ | ~~literal~~ | ~~min 0, max 1~~ | Akronym bzw. gängige Abkürzung der Körperschaft. | Akronym; bisher nicht genutzt |
 | `edm:organizationScope` | literal or reference to Concept | min 0, max unbounded | Tätigkeitsbereich der Organisation im Hinblick auf die inhaltliche Breite in Kulturerbesektoren. Werte stammen aus einer von Europeana gepflegten Liste: `Other/None`, `Cross`, `Single`, `Thematic`, `Individual`. | Bisher im FIDDK nicht genutzt |
 | `edm:organizationDomain` | literal or reference to Concept | min 0, max unbounded | Allgemeiner Tätigkeitsbereich bzw. Sektor, in dem die Organisation arbeitet. Werte aus Europeana-Liste, z. B. `Gallery`, `Library`, `Archive`, `Museum`, `Publisher`, `Research`, `Education`, `Creative Industry`, `Performing Arts` usw. | Domain der Körperschaft; im FIDDK eher GND-Schlagwörter |
@@ -443,7 +443,7 @@ Der FIDDK stützt sich bei Konzepten vor allem auf Sachbegriffe der GND und dere
 ![Concept](images/Concept.png)
 
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Concept)
-- `skos:Concept` deckt im FIDDK auch Epochen/Perioden ab (anstelle von `edm:Timespan`).
+- Epochen/Perioden werden als `edm:TimeSpan` modelliert; bei Bedarf kann zusätzlich ein `skos:Concept` (z. B. aus der GND) verlinkt werden.
 - SKOS-Match-Properties (`skos:broadMatch`, `skos:narrowMatch`, `skos:relatedMatch`, `skos:exactMatch`, `skos:closeMatch`) und `skos:inScheme` werden nicht verwendet.
 - `skos:notation` wird derzeit nicht genutzt.
 
@@ -525,7 +525,7 @@ Class | Type | Example Properties | Example Link | Note
 `skos:Concept` | *concept* | `dc:subject` in `edm:ProvidedCHO` | http://performing-arts.eu/concept/gnd_1234 oder http://performing-arts.eu/concept/TMD_1234 | :warning: Link aktuell nicht weitergeleitet/funktionsfähig
 
 ## Datumsformatierung
-Im FIDDK werden alle Datumsangaben als Zeitspanne angegeben (auch wenn es nur ein Tag ist :arrow_right: dann als Zeitspanne von 00:00:00 bis 23:59:59). Das Datumsformat ist dabei ein Subset von ISO-8601 entsprechend der in [Solr verwendeten Datumsformatierung](https://lucene.apache.org/solr/guide/8_6/working-with-dates.html). Bei Daten vor Christus (BC) wird ein `-` vorangestellt. Bei uneingeschränkten Daten, z.B. bei Zeitschriften ("seit 1987","1987-","bis 1987","-1987") wird ein `*` benutzt. Völlig unklare Werte wie "früher" werden nicht abgebildet. Für die Modellierung unsicherer Angaben wie "Sommer 2002" oder "ca. 1998" siehe [Modellierung von Unsicherheit](#modellierung-von-unsicherheit).
+Im RDF werden Datumsangaben über Ressourcen vom Typ `edm:TimeSpan` mit den Properties `edm:begin` und `edm:end` modelliert. Für die Indexierung und Suche in Solr wird zusätzlich ein Intervall-String verwendet; das Datumsformat ist dabei ein Subset von ISO-8601 entsprechend der in [Solr verwendeten Datumsformatierung](https://lucene.apache.org/solr/guide/8_6/working-with-dates.html). Bei Daten vor Christus (BC) wird ein `-` vorangestellt. Bei uneingeschränkten Daten, z.B. bei Zeitschriften ("seit 1987","1987-","bis 1987","-1987") wird ein `*` benutzt. Völlig unklare Werte wie "früher" werden nicht abgebildet. Für die Modellierung unsicherer Angaben wie "Sommer 2002" oder "ca. 1998" siehe [Modellierung von Unsicherheit](#modellierung-von-unsicherheit).
 
 `YYYY-MM-DDThh:mm:ssZ_YYYY-MM-DDThh:mm:ssZ`
 
