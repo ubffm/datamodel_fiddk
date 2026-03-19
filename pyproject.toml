@@ -24,7 +24,7 @@ dev = ["ruff>=0.4.0"]
 fiddk-validate = "fiddk_validater.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = [{ include = "fiddk_validater", from = "src" }]
+packages = ["src/fiddk_validater"]
 
 [tool.ruff]
 line-length = 100
