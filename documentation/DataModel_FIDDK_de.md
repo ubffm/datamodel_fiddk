@@ -233,6 +233,13 @@ Verbindet ein Objekt (provided CHO) mit den zugehörigen Webresourcen. Sofern ni
 
 ![Aggregation](images/Aggregation.png)
 
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Aggregation)
+- edm:rights ist in EDM auf Aggregationsebene verpflichtend (1..1). Im FIDDK wird edm:rights als optional (0..1) behandelt und nur befüllt, wenn eine eindeutige, konforme Rechte-URI vorliegt; andernfalls erfolgt keine Angabe auf Aggregationsebene.
+- ore:aggregates wird nicht verwendet; Verknüpfungen erfolgen über edm:hasView und edm:aggregatedCHO.
+- edm:ugc wird im FIDDK nicht modelliert; kommt praktisch nicht vor (in EDM nur bei UGC-Fällen verpflichtend).
+- dc:rights auf Aggregationsebene wird im FIDDK nur ausnahmsweise verwendet, wenn unklar ist, worauf sich Rechte beziehen (Übernahme aus ESE). Bevorzugt werden Rechteangaben auf Ebene von WebResource bzw. ProvidedCHO.
+- Europeana-Validierung verlangt eine feste Property-Reihenfolge; im FIDDK gibt es intern keine Reihenfolgepflicht.
+
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
 |-----------|------------|-------------|---------------------|------------|
 | ~~`ore:aggregates`~~ | ~~reference~~ | ~~min 0, max unbounded~~ | ~~(wird grundsätzlich nur über `edm:hasView` und `edm:aggregatedCHO` ausgedrückt)~~ | - |
