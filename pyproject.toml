@@ -32,7 +32,7 @@ target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
-ignore = ["E203", "W503"]
+ignore = ["E203"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["fiddk_validater"]
