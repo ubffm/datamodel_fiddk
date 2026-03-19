@@ -4,7 +4,7 @@
 @prefix xsd:     <http://www.w3.org/2001/XMLSchema#> . 
 @prefix dc:      <http://purl.org/dc/elements/1.1/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix edm:     <https://www.europeana.eu/schemas/edm/> .
+@prefix edm:     <http://www.europeana.eu/schemas/edm/> .
 @prefix ore:     <http://www.openarchives.org/ore/terms/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
@@ -113,7 +113,7 @@ fiddk-sh:ProvidedCHOShape
         sh:nodeKind sh:Literal ;
     ] ;
 
-    # dc:type (1..*)
+    # dc:type (0..*)
     sh:property [
         sh:path dc:type ;
         sh:minCount 0 ;
@@ -259,7 +259,6 @@ fiddk-sh:ProvidedCHOShape
         sh:path dcterms:requires ;
         sh:minCount 0 ;
     ] ;
-
 
     #################################################################
     # Ergänzungen gemäß FIDDK Datenmodell – fehlende EDM Properties
@@ -712,14 +711,10 @@ fiddk-sh:ProvidedCHOShape
         sh:minCount 0 ;
     ] ;
 
-    # dc:format (0..*) – MIME-Typ-Prüfung
+    # dc:format (0..*)
     sh:property [
         sh:path dc:format ;
         sh:minCount 0 ;
-        sh:nodeKind sh:Literal ;
-        sh:datatype xsd:string ;
-        sh:pattern "^[a-z0-9.+-]+/[a-z0-9.+*-]+$" ;
-        sh:flags "i" ;
     ] ;
 
     # dcterms:hasFormat (0..*)
@@ -752,19 +747,13 @@ fiddk-sh:ProvidedCHOShape
         sh:minCount 0 ;
     ] ;
 
-    # edm:isNextInSequence (0..*)
-    sh:property [
-        sh:path edm:isNextInSequence ;
-        sh:minCount 0 ;
-    ] ;
-
     # Wenn edm:type = "TEXT", dann muss mind. eine dc:language vorhanden sein
     sh:sparql [
         a sh:SPARQLConstraint ;
         sh:message "Für Objekte mit edm:type = \"TEXT\" muss mindestens eine dc:language angegeben sein."@de ;
         sh:select """
           PREFIX dc:   <http://purl.org/dc/elements/1.1/>
-          PREFIX edm:  <https://www.europeana.eu/schemas/edm/>
+          PREFIX edm:  <http://www.europeana.eu/schemas/edm/>
 
           SELECT $this
           WHERE {
@@ -774,7 +763,6 @@ fiddk-sh:ProvidedCHOShape
           }
         """
     ] .
-
 
 #################################################################
 # ore:Aggregation
@@ -883,10 +871,14 @@ fiddk-sh:WebResourceShape
         sh:minCount 0 ;
     ] ;
 
-    # dc:format (0..*)
+    # dc:format (0..*) – MIME-Typ-Prüfung
     sh:property [
         sh:path dc:format ;
         sh:minCount 0 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[a-z0-9.+-]+/[a-z0-9.+*-]+$" ;
+        sh:flags "i" ;
     ] ;
 
     # dc:rights (0..*)
@@ -955,30 +947,6 @@ fiddk-sh:WebResourceShape
         sh:minCount 0 ;
     ] ;
 
-    # dcterms:provenance (0..*)
-    sh:property [
-        sh:path dcterms:provenance ;
-        sh:minCount 0 ;
-    ] ;
-
-    # dcterms:references (0..*)
-    sh:property [
-        sh:path dcterms:references ;
-        sh:minCount 0 ;
-    ] ;
-
-    # dcterms:spatial (0..*)
-    sh:property [
-        sh:path dcterms:spatial ;
-        sh:minCount 0 ;
-    ] ;
-
-    # dcterms:temporal (0..*)
-    sh:property [
-        sh:path dcterms:temporal ;
-        sh:minCount 0 ;
-    ] ;
-
     # edm:isNextInSequence (0..*)
     sh:property [
         sh:path edm:isNextInSequence ;
@@ -1008,8 +976,6 @@ fiddk-sh:WebResourceShape
 fiddk-sh:PersonShape
     a sh:NodeShape ;
     sh:targetClass foaf:Person ;
-
-
 
     # 1) max. ein prefLabel pro *nicht-leerem* Sprach-Tag
     sh:property [
@@ -1231,12 +1197,16 @@ fiddk-sh:OrganizationShape
     ] ;
 
     sh:property [
+        sh:path edm:isNextInSequence ;
+        sh:minCount 0 ;
+    ] ;
+
+    sh:property [
         sh:path foaf:depiction ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
         sh:nodeKind sh:IRI ;
     ] ;
-
 
     sh:property [
         sh:path <http://www.w3.org/2002/07/owl#sameAs> ;
@@ -1395,11 +1365,19 @@ fiddk-sh:EventShape
     sh:property [
         sh:path edm:happenedAt ;
         sh:minCount 0 ;
+        sh:or (
+            [ sh:nodeKind sh:Literal ]
+            [ sh:nodeKind sh:IRI ]
+        ) ;
     ] ;
 
     sh:property [
         sh:path edm:occurredAt ;
         sh:minCount 0 ;
+        sh:or (
+            [ sh:nodeKind sh:Literal ]
+            [ sh:nodeKind sh:IRI ]
+        ) ;
     ] ;
 
     sh:property [
@@ -1410,8 +1388,24 @@ fiddk-sh:EventShape
 
     sh:property [
         sh:path skos:prefLabel ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:uniqueLang true
+    ] ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Maximal ein skos:prefLabel ohne Sprach-Tag pro Ressource."@de ;
+        sh:select """
+          PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+          SELECT $this
+          WHERE {
+            $this skos:prefLabel ?l .
+            FILTER ( isLiteral(?l) && LANG(?l) = "" )
+          }
+          GROUP BY $this
+          HAVING (COUNT(?l) > 1)
+        """
     ] ;
 
     sh:property [
@@ -1907,4 +1901,3 @@ fiddk-sh:TimeSpanShape
         sh:minCount 0 ;
         sh:nodeKind sh:IRI ;
     ] .
-
