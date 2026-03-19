@@ -57,7 +57,7 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 ## Namespaces
 - `dc`: http://purl.org/dc/elements/1.1/
 - `dcterms`: http://purl.org/dc/terms/
-- `edm`: http://www.europeana.eu/schemas/edm/
+- `edm`: https://www.europeana.eu/schemas/edm/
 - `ore`: http://www.openarchives.org/ore/terms/
 - `owl`: http://www.w3.org/2002/07/owl#
 - `rdf`: http://www.w3.org/1999/02/22-rdf-syntax-ns#
@@ -156,7 +156,6 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | edm:type | literal | min 1, max 1 | Muss einer der Europeana-Typen sein (TEXT, VIDEO, SOUND, IMAGE, 3D). | Großschreibung (case-sensitive) gemäß EDM; FIDDK folgt der Vorgabe. | | |
 | edm:wasPresentAt | reference to Event | min 0, max unbounded | CHO war bei einem Ereignis präsent/assoziiert. | Referenz zu Event … (FIDDK-Erweiterung) | | |
 | owl:sameAs | reference | min 0, max unbounded | Verweis auf andere Linked-Data-Repräsentation desselben Objekts. | Link zu anderer URI … | | |
-| rdf:type | reference | min 0, max unbounded | — | — | | |
 
 
 <a id="providedcho-extra-props"></a>
