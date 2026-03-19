@@ -1,11 +1,11 @@
-# Datenmodell FIDDK - Application Profile EDM
+# Datenmodell FID DK - Application Profile EDM
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 - [Datenmodell FID DK - Application Profile EDM](#datenmodell-fid-dk-application-profile-edm)
 	- [Allgemeines](#allgemeines)
 	- [Namespaces](#namespaces)
-		- [Zusätzliche Namespaces im FIDDK](#zusätzliche-namespaces-im-fiddk)
+		- [Zusätzliche Namespaces im FID DK](#zusätzliche-namespaces-im-fid-dk)
 	- [EDM Core Classes](#edm-core-classes)
 		- [edm:ProvidedCHO](#edmprovidedcho)
 			- [Zusätzliche ProvidedCHO Properties im FIDDK](#zusätzliche-providedcho-properties-im-fiddk)
@@ -44,11 +44,11 @@
 ## Allgemeines
 - Nachnutzung des Metadatenstandards [EDM (Europeana Data Model)](https://pro.europeana.eu/page/edm-documentation) + universell (GLAM) + erweiterbar + flexibel + RDF basiert
 - dieses Application Profile basiert auf der Originaldokumentation von [EDM](https://pro.europeana.eu/page/edm-documentation) entsprechend der [Mapping Guidelines](https://europeana.atlassian.net/wiki/spaces/EF/pages/987791389/EDM+-+Mapping+guidelines), der [EDM Object Templates](https://github.com/europeana/corelib/wiki/EDMObjectTemplatesProviders) und des [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
-- die Daten liegen im FIDDK als `RDF/XML` vor
+- die Daten liegen im FID DK als `RDF/XML` vor
 - im Folgenden eine Übersicht über EDM, seine Klassen und Properties sowie
-Hinweise zu den Änderungen im FIDDK (Application Profile, Änderungen sind **fett** markiert bzw ~~durchgestrichen~~)
+Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **fett** markiert bzw ~~durchgestrichen~~)
 - Nicht alles, das nicht durchgestrichen ist, wird auch tatsächlich genutzt. Teilweise wurde es nur noch nicht implementiert oder es kam noch nicht vor.
-- FIDDK Note dient nur der Erklärung und entspricht nicht zwingend der Anzeige im FID Portal.
+- FID DK Note dient nur der Erklärung und entspricht nicht zwingend der Anzeige im FID Portal.
 - :warning: Dies ist ein Draft und kann sich noch ändern
 
 ## Namespaces
@@ -65,7 +65,7 @@ Hinweise zu den Änderungen im FIDDK (Application Profile, Änderungen sind **fe
 - `crm`: http://www.cidoc-crm.org/cidoc-crm/
 - `cc`: http://creativecommons.org/ns#
 
-### Zusätzliche Namespaces im FIDDK
+### Zusätzliche Namespaces im FID DK
 - `bibo`: http://purl.org/ontology/bibo/
 - `bf`: http://id.loc.gov/ontologies/bibframe/
 
@@ -77,8 +77,8 @@ Der DM2E Namespace ist über den Link http://onto.dm2e.eu/schemas/dm2e/ nicht me
 ![EDM Classes](images/Classes.png)
 
 ### edm:ProvidedCHO
-Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie z.B. Buch, Programmheft, Grafik, Fotografie, Kostüm, Theaterzettel, Plakat, Video, Brief, ...). Es steht im Gegensatz zur `edm:WebResource`, die eine digitale Repräsentation des physischen Objekts abbildet.
-- Im FIDDK kann das CHO auch abstrakt sein, da es in EDM keine Klasse für das Werk oder die Produktion gibt. So werden im FIDDK Inszenierungsbeschreibungen, Produktionen und Werke ebenfalls als `edm:ProvidedCHO` abgebildet und über `dc:type` als solche gekennzeichnet.
+Beschreibt ein Cultural Heritage Object (CHO), im Fall des FID DK ein Objekt wie z.B. Buch, Programmheft, Grafik, Fotografie, Kostüm, Theaterzettel, Plakat, Video, Brief, ...). Es steht im Gegensatz zur `edm:WebResource`, die eine digitale Repräsentation des physischen Objekts abbildet.
+- Im FID DK kann das CHO auch abstrakt sein, da es in EDM keine Klasse für das Werk oder die Produktion gibt. So werden im FID DK Inszenierungsbeschreibungen, Produktionen und Werke ebenfalls als `edm:ProvidedCHO` abgebildet und über `dc:type` als solche gekennzeichnet.
 - Bei Angaben zu Personen, die mit dem Provided CHO in Verbindung stehen, soll bevorzugt auf Normdaten in `foaf:Person` oder `foaf:Organization` verlinkt werden und ein Literal nur benutzt werden, wenn keine Normdaten vorhanden sind.
 - Sprachangaben für textuelle Angaben wie z.B. bei `dc:description` werden dem XML Standard entsprechend als Attribut `@xml:lang` mit *ISO 639-1* angegeben, s. https://www.w3.org/TR/REC-xml/#sec-lang-tag bzw. https://tools.ietf.org/html/rfc4646#section-2.2.1  
 - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
@@ -89,15 +89,15 @@ Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie 
 ![CHO_4](images/CHO_4.png)
 
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
-- FIDDK modelliert Inszenierungen/Produktionen/Werke als abstrakte ProvidedCHO und kennzeichnet sie über dc:type.
-- FIDDK nutzt die optionalen EDM-Properties dc:date, dcterms:conformsTo und edm:hasType nicht; stattdessen werden dcterms:created, dcterms:issued oder dcterms:temporal verwendet.
-- dc:title ist im FIDDK auf max. 1 pro CHO beschränkt; zusätzliche Titel/Übersetzungen werden über dcterms:alternative modelliert.
-- Sprachangaben: FIDDK verwendet bevorzugt ISO 639-1 (xml:lang), während EDM ISO 639-2/-3 empfiehlt.
-- edm:isRelatedTo wird im FIDDK in der Praxis auf Konzepte/Literale beschränkt; generische Verweise werden vermieden.
+- FID DK modelliert Inszenierungen/Produktionen/Werke als abstrakte ProvidedCHO und kennzeichnet sie über dc:type.
+- FID DK nutzt die optionalen EDM-Properties dc:date, dcterms:conformsTo und edm:hasType nicht; stattdessen werden dcterms:created, dcterms:issued oder dcterms:temporal verwendet.
+- dc:title ist im FID DK auf max. 1 pro CHO beschränkt; zusätzliche Titel/Übersetzungen werden über dcterms:alternative modelliert.
+- Sprachangaben: FID DK verwendet bevorzugt ISO 639-1 (xml:lang), während EDM ISO 639-2/-3 empfiehlt.
+- edm:isRelatedTo wird im FID DK in der Praxis auf Konzepte/Literale beschränkt; generische Verweise werden vermieden.
 - Datumsangaben werden über `edm:TimeSpan` modelliert (`edm:begin`/`edm:end`); menschenlesbare Anzeigeformen über `skos:prefLabel`; kein `rdfs:label` an Properties.
-- Erweiterungen durch bibo/bf/rdau für Identifikatoren und Rollen, die in EDM nicht vorhanden sind (siehe Abschnitt „Zusätzliche ProvidedCHO Properties im FIDDK“).
+- Erweiterungen durch bibo/bf/rdau für Identifikatoren und Rollen, die in EDM nicht vorhanden sind (siehe Abschnitt „Zusätzliche ProvidedCHO Properties im FID DK“).
 
-| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note | Display German | Display English |
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note | Display German | Display English |
 |-----------|------------|-------------|---------------------|------------|----------------|-----------------|
 | dc:contributor | literal or reference to Agent | min 0, max unbounded | Verwenden für Beitragende zum CHO. Wenn möglich, die Kennung der beitragenden Person aus einer Normdatenquelle angeben. Anbieter mit differenzierteren Rollentypen können einen Teil auf dc:contributor und andere auf dc:creator abbilden. Für mehrere Beitragende wiederholen. <dc:contributor>Maria Callas</dc:contributor> oder als Referenz auf eine Instanz der Agent-Klasse <dc:contributor rdf:resource="http://www.example.com/MariaCallas"/> | Beitragende; allgemeinste Tätigkeitsform; Nutzung im FIDDK, wenn sonst nichts zutrifft | Beitragender | Contributor |
 | dc:coverage | literal or reference | min 0, max unbounded - eines von dc:subject, dc:type, dcterms:spatial oder dcterms:temporal ist verpflichtend | Räumliches oder zeitliches Thema des CHO. Verwenden Sie nach Möglichkeit die präziseren Eigenschaften dcterms:spatial oder dcterms:temporal. <dc:coverage>1995–1996</dc:coverage> oder <dc:coverage>Berlin</dc:coverage> oder als Referenz auf eine Instanz einer Kontextklasse, z. B. Place-Klasse <dc:coverage rdf:resource="http://sws.geonames.org/2950159"/> | bisher keine Notwendigkeit für dieses Property | - | - |
@@ -153,13 +153,13 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | rdf:type | reference | min 0, max unbounded | — | — | | |
 
 
-#### Zusätzliche ProvidedCHO Properties im FIDDK
+#### Zusätzliche ProvidedCHO Properties im FID DK
 - Sofern nicht anders angegeben, wird der Originaldefinition der Property gefolgt.
 - RDAU hätte noch weitere interessante Tätigkeitsproperties und auch um Objektbeziehungen genauer zu definieren (ist choreografische Adaption von..., Drehbuch basiert auf..., hat Libretto... usw.). So detailliert wird es jedoch selten von Datengeber_innen erfasst.
 - bibo kann nicht durch rdau ersetzt werden. Es gibt zwar ISSN, aber nicht ISBN. In bibframe gibt es ISBN und ISSN nur als Klassen nicht als Properties.
 - dm2e wurde durch rdau und bibframe vollständig ersetzt
 
-| Properties | Value type | Cardinality | Bibo / Bf / Rdau Note (Deutsch) | FIDDK Note |
+| Properties | Value type | Cardinality | Bibo / Bf / Rdau Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------------------|------------|
 | `bibo:isbn` | literal | min 0, max 1 | ISBN | ISBN bei Büchern; Formatprüfung auf ISBN |
 | `bibo:issn` | literal | min 0, max 1 | ISSN | ISSN bei Zeitschriften; Formatprüfung auf ISSN |
@@ -233,13 +233,13 @@ Verbindet ein Objekt (provided CHO) mit den zugehörigen Webresourcen. Sofern ni
 ![Aggregation](images/Aggregation.png)
 
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Aggregation)
-- edm:rights ist in EDM auf Aggregationsebene verpflichtend (1..1). Im FIDDK wird edm:rights als optional (0..1) behandelt und nur befüllt, wenn eine eindeutige, konforme Rechte-URI vorliegt; andernfalls erfolgt keine Angabe auf Aggregationsebene.
+- edm:rights ist in EDM auf Aggregationsebene verpflichtend (1..1). Im FID DK wird edm:rights als optional (0..1) behandelt und nur befüllt, wenn eine eindeutige, konforme Rechte-URI vorliegt; andernfalls erfolgt keine Angabe auf Aggregationsebene.
 - ore:aggregates wird nicht verwendet; Verknüpfungen erfolgen über edm:hasView und edm:aggregatedCHO.
-- edm:ugc wird im FIDDK nicht modelliert; kommt praktisch nicht vor (in EDM nur bei UGC-Fällen verpflichtend).
-- dc:rights auf Aggregationsebene wird im FIDDK nur ausnahmsweise verwendet, wenn unklar ist, worauf sich Rechte beziehen (Übernahme aus ESE). Bevorzugt werden Rechteangaben auf Ebene von WebResource bzw. ProvidedCHO.
-- Europeana-Validierung verlangt eine feste Property-Reihenfolge; im FIDDK gibt es intern keine Reihenfolgepflicht.
+- edm:ugc wird im FID DK nicht modelliert; kommt praktisch nicht vor (in EDM nur bei UGC-Fällen verpflichtend).
+- dc:rights auf Aggregationsebene wird im FID DK nur ausnahmsweise verwendet, wenn unklar ist, worauf sich Rechte beziehen (Übernahme aus ESE). Bevorzugt werden Rechteangaben auf Ebene von WebResource bzw. ProvidedCHO.
+- Europeana-Validierung verlangt eine feste Property-Reihenfolge; im FID DK gibt es intern keine Reihenfolgepflicht.
 
-| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------|------------|
 | ~~`ore:aggregates`~~ | ~~reference~~ | ~~min 0, max unbounded~~ | ~~(wird grundsätzlich nur über `edm:hasView` und `edm:aggregatedCHO` ausgedrückt)~~ | - |
 | `edm:aggregatedCHO` | reference to CHO | min 1, max 1 | Die Kennung des zugrunde liegenden Objekts, z. B. der Mona Lisa selbst. Dies kann eine vollständige Linked-Open-Data-URI oder ein interner Identifier sein. `<edm:aggregatedCHO rdf:resource="#UEDIN:214"/>` | Link zum zugehörigen `edm:ProvidedCHO`; mandatory |
@@ -255,7 +255,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Aggregation)
 | ~~`edm:ugc`~~ | ~~literal (true)~~ | ~~min 0, max 1~~ | ~~Pflichtfeld für nutzergenerierte Inhalte (Crowdsourcing usw.), Wert muss „true“ sein.~~ | kommt im FIDDK nicht vor |
 
 
-#### Zusätzliche Aggregation Properties im FIDDK
+#### Zusätzliche Aggregation Properties im FID DK
 - keine
 
 ### edm:WebResource
@@ -264,16 +264,16 @@ Eine digitale Repräsentation des vorliegenden provided CHO. - Sofern nicht ande
 ![WebResource](images/WebResource.png)
 
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (WebResource)
-- FIDDK verwendet das optionale edm:rights auf Ebene der WebResource derzeit nicht; Rechtehinweise der Datengeber_innen werden über dc:rights erfasst. Europeana empfiehlt für edm:rights eine URI aus den „available-rights-statements“ (http, nicht https); Rechte auf WebResource-Ebene überschreiben Angaben auf Aggregationsebene.
+- FID DK verwendet das optionale edm:rights auf Ebene der WebResource derzeit nicht; Rechtehinweise der Datengeber_innen werden über dc:rights erfasst. Europeana empfiehlt für edm:rights eine URI aus den „available-rights-statements“ (http, nicht https); Rechte auf WebResource-Ebene überschreiben Angaben auf Aggregationsebene.
 - dc:format wird als MIME Type angegeben (z. B. image/jpeg).
 - Für dc:type der WebResource wird aktuell kein kontrolliertes Vokabular eingesetzt; gemäß EDM sollten Begriffe idealerweise aus einem kontrollierten Vokabular stammen und dc:type der WebResource sollte nicht identisch zu edm:type sein.
-- dcterms:isReferencedBy wird im FIDDK explizit zur Verknüpfung mit IIIF-Manifesten genutzt.
+- dcterms:isReferencedBy wird im FID DK explizit zur Verknüpfung mit IIIF-Manifesten genutzt.
 - dc:creator und dc:source werden in der Praxis selten bzw. nicht genutzt (optional).
 - svcs:has_service wird nicht verwendet (deprecated).
-- Hierarchien: dcterms:isPartOf/dcterms:hasPart können für WebResource-Hierarchien genutzt werden; nicht parallel zu ProvidedCHO-Hierarchien (EDM-Vorgabe, vom FIDDK beachtet).
-- Europeana-Validierung verlangt eine feste Property-Reihenfolge in Datensätzen; intern im FIDDK besteht keine besondere Reihenfolgeanforderung.
+- Hierarchien: dcterms:isPartOf/dcterms:hasPart können für WebResource-Hierarchien genutzt werden; nicht parallel zu ProvidedCHO-Hierarchien (EDM-Vorgabe, vom FID DK beachtet).
+- Europeana-Validierung verlangt eine feste Property-Reihenfolge in Datensätzen; intern im FID DK besteht keine besondere Reihenfolgeanforderung.
 
-| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `dc:creator` | literal or reference to Agent | min 0, max unbounded | Für den/die Ersteller*in der Webressource. Wenn möglich, die Kennung des/der Ersteller*in aus einer Normdatenquelle angeben. Wiederholen bei mehreren Ersteller*innen. `<dc:creator xml:lang="es">Biblioteca Nacional de España</dc:creator>` oder als Referenz auf eine Instanz der Agent-Klasse `<dc:creator rdf:resource="http://viaf.org/viaf/147143794/"/>` | Ersteller des Digitalisats; im FIDDK bisher nicht genutzt |
 | `dc:description` | literal or reference | min 0, max unbounded | Verwenden für eine Beschreibung dieser digitalen Repräsentation. `<dc:description>Performance with Buccin trombone</dc:description>` | Beschreibung des Digitalisats; im FIDDK Anzeigetext des Links |
@@ -295,7 +295,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (WebResource)
 | ~~`svcs:has_service`~~ | ~~reference~~ | ~~min 0, max unbounded~~ | – | – |
 
 
-#### Zusätzliche Webresource Properties im FIDDK
+#### Zusätzliche Webresource Properties im FID DK
 - keine
 
 ## EDM Contextual Classes
@@ -317,9 +317,9 @@ Hier auf Basis von `edm:Agent`, im Original EDM gibt es `foaf:Person` in der For
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
 - Namensführung über `skos:prefLabel`/`skos:altLabel`; `foaf:name` wird nicht verwendet.
 - Personenbezogene Eigenschaften sind auf RDAU gemappt (anstatt rdaGr2); `edm:begin`/`edm:end` werden für Personen nicht genutzt.
-- Zusätze im FIDDK: `rdau:P60095` (Affiliation) und `foaf:depiction` für ein Personenbild.
+- Zusätze im FID DK: `rdau:P60095` (Affiliation) und `foaf:depiction` für ein Personenbild.
 
-| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `skos:prefLabel` | literal | min 0, max 1 per lang tag | Die bevorzugte Namensform des Agenten. Obwohl die maximale Anzahl auf 1 gesetzt ist, gilt dies als 1 **pro Sprach-Tag**. Mindestens ein `skos:prefLabel` SOLLTE angegeben werden. Mehrere Labels mit Sprachkennzeichnung werden für Varianten und Übersetzungen dringend empfohlen. `<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` `<skos:prefLabel xml:lang="en">Courtois’ eldest nephew</skos:prefLabel>` | voller bevorzugter Name … |
 | `skos:altLabel` | literal | min 0, max unbounded | Alternative Namensformen des Agenten. Dieses Property wird empfohlen. `<skos:altLabel xml:lang="en">Courtois</skos:altLabel>` `<skos:altLabel xml:lang="fr">Augte. Courtois aîné</skos:altLabel>` | Namensvarianten; auch Pseudonyme … |
@@ -342,7 +342,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
 | `owl:sameAs` | reference to Agent (Person) | min 0, max unbounded | Eine weitere URI derselben Person. `<owl:sameAs rdf:resource="http://www.identifier/sameResourceElsewhere"/>` | Link zur GND oder weiteren Dubletten |
 
 
-##### Zusätzliche Person Properties im FIDDK
+##### Zusätzliche Person Properties im FID DK
 
 Properties | Value type | Cardinality | FIDDK Note
 ------------|------------|------------|------------
@@ -356,10 +356,10 @@ Hier auf Basis von `foaf:Organization` der Object Templates, im Original EDM gib
 
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Organization)
 - Namensführung über `skos:prefLabel`/`skos:altLabel`; Gründungs-/Auflösungsdaten via `rdau:P60524`/`rdau:P60525`; `edm:acronym` wird nicht verwendet.
-- Europeana-spezifische Felder (`edm:organizationScope`, `edm:organizationDomain`, `edm:organizationSector`, `edm:geographicLevel`) sind im FIDDK derzeit ungenutzt.
-- Zusätze im FIDDK: `edm:isNextInSequence` (zeitliche Folge) und `foaf:depiction`.
+- Europeana-spezifische Felder (`edm:organizationScope`, `edm:organizationDomain`, `edm:organizationSector`, `edm:geographicLevel`) sind im FID DK derzeit ungenutzt.
+- Zusätze im FID DK: `edm:isNextInSequence` (zeitliche Folge) und `foaf:depiction`.
 
-| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `skos:prefLabel` | literal | min 0, max 1 per lang tag | Die bevorzugte Namensform der Körperschaft. Obwohl die maximale Wiederholung mit 1 angegeben ist, gilt dies als 1 **pro Sprach-Tag**. Mindestens ein `skos:prefLabel` SOLLTE angegeben werden. Mehrere Varianten mit Sprachkennzeichnung werden für unterschiedliche Sprachfassungen oder Übersetzungen dringend empfohlen. `<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` `<skos:prefLabel xml:lang="en">Courtois' eldest nephew</skos:prefLabel>` | bevorzugter Name der Körperschaft; Sprachtag sofern bekannt |
 | `skos:altLabel` | literal | min 0, max unbounded | Alternative Namensformen der Körperschaft. Dieses Property wird empfohlen. `<skos:altLabel xml:lang="en">Courtois</skos:altLabel>` `<skos:altLabel xml:lang="fr">Augte. Courtois aîné</skos:altLabel>` | Namensvarianten; Sprachtag sofern bekannt |
@@ -383,7 +383,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Organization)
 | `owl:sameAs` | reference to Agent (Orga) | min 0, max unbounded | – | Link zu GND oder weiteren Dubletten |
 
 
-##### Zusätzliche Organization Properties im FIDDK
+##### Zusätzliche Organization Properties im FID DK
 Properties | Value type | Cardinality | FIDDK Note
 ------------|------------|------------|------------|
 `edm:isNextInSequence` | reference to Agent (Orga) | min 0, max unbounded | Für die Abbildung von Vorgänger/Nachfolger Körperschaften (zeitlich)
@@ -399,7 +399,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Place)
 - Benennungen über `skos:prefLabel`/`skos:altLabel`; erläuternde Hinweise über `skos:note`.
 - Nutzung von `edm:isNextInSequence` zur Abbildung historischer Ortsabfolgen.
 
-| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `wgs84_pos:lat` | floating point | min 0, max 1 | Die geografische Breite eines Ortsobjekts (in Dezimalgrad). Dieses Property wird für diese Klasse empfohlen. `<wgs84_pos:lat>51.5075</wgs84_pos:lat>` | Latitude Koordinate als Floating Point |
 | `wgs84_pos:long` | floating point | min 0, max 1 | Die geografische Länge eines Ortsobjekts (in Dezimalgrad). Dieses Property wird für diese Klasse empfohlen. `<wgs84_pos:long>-0.1231</wgs84_pos:long>` | Longitude Koordinate als Floating Point |
@@ -417,14 +417,14 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Place)
 - keine
 
 ### edm:TimeSpan
-`edm:TimeSpan` wird im FIDDK zur sauberen Modellierung zeitlicher Angaben und Unsicherheiten eingesetzt. Zeitspannen (Ereignisse, Entstehung, Veröffentlichung, Epochen/Perioden) werden als eigene Ressourcen modelliert, sodass maschinenlesbare Normalisierungen und menschenlesbare Anzeigen getrennt gepflegt werden können.
+`edm:TimeSpan` wird im FID DK zur sauberen Modellierung zeitlicher Angaben und Unsicherheiten eingesetzt. Zeitspannen (Ereignisse, Entstehung, Veröffentlichung, Epochen/Perioden) werden als eigene Ressourcen modelliert, sodass maschinenlesbare Normalisierungen und menschenlesbare Anzeigen getrennt gepflegt werden können.
 
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (TimeSpan)
-- FIDDK verwendet `edm:TimeSpan` für unsichere/ungefähre Datierungen: Normalisierung über `edm:begin`/`edm:end`, Anzeigeform z. B. über `skos:prefLabel` („ca. 1810“).
+- FID DK verwendet `edm:TimeSpan` für unsichere/ungefähre Datierungen: Normalisierung über `edm:begin`/`edm:end`, Anzeigeform z. B. über `skos:prefLabel` („ca. 1810“).
 - Epochen/Perioden können als `edm:TimeSpan` modelliert werden; bei Bedarf kann zusätzlich ein `skos:Concept` verlinkt werden (z. B. GND-Epoche) – die Zeitgrenzen bleiben am `edm:TimeSpan`.
 - Datumsangaben als reine Literale mit Attribut-Annotationen (z. B. `rdfs:label`) werden nicht mehr verwendet.
 
-| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `skos:prefLabel` | literal | min 0, max 1 per lang tag | Bevorzugte Benennung der Zeitspanne/Epoche. | Für Anzeigeformen wie „ca. 1810“, „Sommer 2002“ |
 | `skos:altLabel` | literal | min 0, max unbounded | Alternative Benennungen. | Optional |
@@ -438,7 +438,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (TimeSpan)
 
 
 ### skos:Concept
-Der FIDDK stützt sich bei Konzepten vor allem auf Sachbegriffe der GND und deren Relationen. Konzepte im FIDDK können auch Epochenangaben sein.
+Der FID DK stützt sich bei Konzepten vor allem auf Sachbegriffe der GND und deren Relationen. Konzepte im FID DK können auch Epochenangaben sein.
 
 ![Concept](images/Concept.png)
 
@@ -461,7 +461,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Concept)
 | ~~`skos:inScheme`~~ | ~~reference to ConceptScheme~~ | ~~min 0, max unbounded~~ | ~~URI eines Konzeptschema.~~ | keine Schemas im FIDDK |
 
 
-#### Zusätzliche Concept Properties im FIDDK
+#### Zusätzliche Concept Properties im FID DK
 - keine
 
 ### edm:Event
@@ -470,7 +470,7 @@ Events basieren entweder auf der GND (Konferenz oder Ereignis bzw. Konferenz-/Er
 ![Event](images/Event.png)
 
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Event)
-- `edm:happenedAt` und `edm:occurredAt` dürfen im FIDDK auch Literale sein (Range gelockert); EDM erwartet Referenzen (`Place`/`TimeSpan`).
+- `edm:happenedAt` und `edm:occurredAt` dürfen im FID DK auch Literale sein (Range gelockert); EDM erwartet Referenzen (`Place`/`TimeSpan`).
 - `dcterms:hasPart` und `dcterms:isPartOf` können Referenzen oder Literale sein.
 - `edm:hasType` wird mit GND‑Sachbegriffen belegt; kontrolliertes Vokabular im Aufbau.
 - Erweiterungen: RDAU‑Rollen analog zu `edm:ProvidedCHO`, zusätzlich `foaf:depiction` und `foaf:homepage`.
@@ -490,7 +490,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 `edm:hasType` |	literal or reference to Concept | min 0, max unbounded | - | Art des Ereignises (Premiere, ...) :arrow_right: Basierend auf GND Sachbegriffen (:warning:noch kein fertiges Vokabular)
 `edm:isRelatedTo` |	reference	to Event **or literal** | min 0, max unbounded | - | Verweis auf vergleichbare / in Beziehung stehende Ereignisse
 
-#### Zusätzliche Event Properties im FIDDK
+#### Zusätzliche Event Properties im FID DK
 - alle Tätigkeitsproperties, die auch zu `edm:ProvidedCHO` hinzugefügt wurden (s.o.)
 - sowie:
 
@@ -537,7 +537,7 @@ Im RDF werden Datumsangaben über Ressourcen vom Typ `edm:TimeSpan` mit den Prop
 - `-0009-01-01T00:00:00Z_-0009-12-31T23:59:59Z` (Jahr 10 v.Chr. (Jahr 0 wird als Jahr 1 v.Chr. betrachtet))
 
 ## Modellierung von Unsicherheit
-Im FIDDK werden Unsicherheiten nicht mehr über Attribute wie `@rdfs:label` an Property-Elementen modelliert. Stattdessen werden unsichere oder ungefähre Angaben über `edm:TimeSpan`-Ressourcen abgebildet:
+Im FID DK werden Unsicherheiten nicht mehr über Attribute wie `@rdfs:label` an Property-Elementen modelliert. Stattdessen werden unsichere oder ungefähre Angaben über `edm:TimeSpan`-Ressourcen abgebildet:
 - Maschinenlesbare Normalisierung: `edm:begin` und `edm:end` (ISO‑8601‑Subset, vgl. Abschnitt „Datumsformatierung“).
 - Menschenlesbare Anzeigeform: `skos:prefLabel` (z. B. „ca. 1810“, „Sommer 2002“).
 
@@ -554,7 +554,7 @@ Für Ortsunsicherheiten (z. B. „[Hamburg?]“) wird der normierte Ort weiter
   - zusätzlich: `edm:happenedAt` als Literal „[Hamburg?]“ (falls für Anzeige benötigt)
 
 ## XML Schema
-XML Schema des FIDDK basiert auf [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
+XML Schema des FID DK basiert auf [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
 
 **TODO**
 
