@@ -37,9 +37,8 @@ def validate(
     loaded = False
     if shapes_dir.is_dir():
       for entry in shapes_dir.iterdir():
-        if entry.is_file():
-          fmt = rdflib_guess_format(entry.name) or "turtle"
-          shacl_graph.parse(data=entry.read_text(encoding="utf-8"), format=fmt)
+        if entry.is_file() and entry.name.endswith(".ttl"):
+          shacl_graph.parse(data=entry.read_text(encoding="utf-8"), format="turtle")
           loaded = True
     else:
       entry = resources.files("fiddk_validater").joinpath("shapes").joinpath("fiddk.ttl")

@@ -1,0 +1,146 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> . 
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edm:     <http://www.europeana.eu/schemas/edm/> .
+@prefix ore:     <http://www.openarchives.org/ore/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdau:    <http://www.rdaregistry.info/Elements/u/> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix bf:      <http://id.loc.gov/ontologies/bibframe/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+@prefix fiddk-sh: <https://performing-arts.eu/shapes/fiddk/> .
+
+#################################################################
+# foaf:Person
+#################################################################
+
+fiddk-sh:PersonShape
+    a sh:NodeShape ;
+    sh:targetClass foaf:Person ;
+
+    # 1) max. ein prefLabel pro *nicht-leerem* Sprach-Tag
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:nodeKind sh:Literal ;
+        sh:uniqueLang true
+    ] ;
+
+    # 2) max. ein prefLabel ohne Sprach-Tag
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Maximal ein skos:prefLabel ohne Sprach-Tag pro Ressource."@de ;
+        sh:select """
+          PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+          SELECT $this
+          WHERE {
+            $this skos:prefLabel ?l .
+            FILTER ( isLiteral(?l) && LANG(?l) = "" )
+          }
+          GROUP BY $this
+          HAVING (COUNT(?l) > 1)
+        """
+    ] ;
+
+    sh:property [
+        sh:path skos:altLabel ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path skos:note ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path dc:date ;
+        sh:minCount 0 ;
+    ] ;
+
+    sh:property [
+        sh:path dc:identifier ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path edm:hasMet ;
+        sh:minCount 0 ;
+    ] ;
+
+    sh:property [
+        sh:path edm:isRelatedTo ;
+        sh:minCount 0 ;
+    ] ;
+
+    sh:property [
+        sh:path edm:wasPresentAt ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60492 ;  # biographicalInformation
+        sh:minCount 0 ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60599 ;  # dateOfBirth
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60598 ;  # dateOfDeath
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60594 ;  # placeOfBirth
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60592 ;  # placeOfDeath
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60531 ;  # gender
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60468 ;  # professionOrOccupation
+        sh:minCount 0 ;
+    ] ;
+
+    sh:property [
+        sh:path rdau:P60095 ;  # has affiliation
+        sh:minCount 0 ;
+    ] ;
+
+    sh:property [
+        sh:path foaf:depiction ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    sh:property [
+        sh:path <http://www.w3.org/2002/07/owl#sameAs> ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+    ] .

@@ -1,0 +1,134 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> . 
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edm:     <http://www.europeana.eu/schemas/edm/> .
+@prefix ore:     <http://www.openarchives.org/ore/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdau:    <http://www.rdaregistry.info/Elements/u/> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix bf:      <http://id.loc.gov/ontologies/bibframe/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+@prefix fiddk-sh: <https://performing-arts.eu/shapes/fiddk/> .
+
+#################################################################
+# edm:WebResource
+#################################################################
+
+fiddk-sh:WebResourceShape
+    a sh:NodeShape ;
+    sh:targetClass edm:WebResource ;
+
+    # dc:creator (0..*)
+    sh:property [
+        sh:path dc:creator ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:description (0..*)
+    sh:property [
+        sh:path dc:description ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:format (0..*) – MIME-Typ-Prüfung
+    sh:property [
+        sh:path dc:format ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[a-z0-9.+-]+/[a-z0-9.+*-]+$" ;
+        sh:flags "i" ;
+    ] ;
+
+    # dc:rights (0..*)
+    sh:property [
+        sh:path dc:rights ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:source (0..*)
+    sh:property [
+        sh:path dc:source ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:type (0..*)
+    sh:property [
+        sh:path dc:type ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:conformsTo (0..*)
+    sh:property [
+        sh:path dcterms:conformsTo ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:created (0..*)
+    sh:property [
+        sh:path dcterms:created ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:extent (0..*)
+    sh:property [
+        sh:path dcterms:extent ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:hasPart (0..*)
+    sh:property [
+        sh:path dcterms:hasPart ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:isFormatOf (0..*)
+    sh:property [
+        sh:path dcterms:isFormatOf ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:isReferencedBy (0..*)
+    sh:property [
+        sh:path dcterms:isReferencedBy ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:isPartOf (0..*)
+    sh:property [
+        sh:path dcterms:isPartOf ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:issued (0..*)
+    sh:property [
+        sh:path dcterms:issued ;
+        sh:minCount 0 ;
+    ] ;
+
+    # edm:isNextInSequence (0..*)
+    sh:property [
+        sh:path edm:isNextInSequence ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # edm:rights (0..1)
+    sh:property [
+        sh:path edm:rights ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+    ] ;
+
+    # owl:sameAs (0..*)
+    sh:property [
+        sh:path <http://www.w3.org/2002/07/owl#sameAs> ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:IRI ;
+    ] .
