@@ -4,7 +4,7 @@ import sys
 from .validator import validate_to_files
 
 
-def main(argv=None) -> None:
+def main(argv: list[str] | None = None) -> None:
   parser = argparse.ArgumentParser(
     description="SHACL-Validierung für FID-Daten (pySHACL).",
   )

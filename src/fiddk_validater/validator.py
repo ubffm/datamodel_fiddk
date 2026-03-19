@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional, Tuple, Union
 
 from pyshacl import validate as shacl_validate
 from rdflib import Graph
 from rdflib.util import guess_format as rdflib_guess_format
 
-Pathish = Union[str, Path]
+Pathish = str | Path
 
 
-def _resolve_format(path: Pathish, provided: Optional[str]) -> Optional[str]:
+def _resolve_format(path: Pathish, provided: str | None) -> str | None:
   if provided:
     return provided
   try:
@@ -22,12 +21,12 @@ def _resolve_format(path: Pathish, provided: Optional[str]) -> Optional[str]:
 def validate(
   data_path: Pathish,
   shacl_path: Pathish,
-  data_format: Optional[str] = None,
-  shacl_format: Optional[str] = None,
+  data_format: str | None = None,
+  shacl_format: str | None = None,
   inference: str = "rdfs",
   advanced: bool = False,
   debug: bool = False,
-) -> Tuple[bool, Graph, str]:
+) -> tuple[bool, Graph, str]:
   data_graph = Graph()
   data_graph.parse(str(data_path), format=_resolve_format(data_path, data_format))
 
@@ -48,9 +47,9 @@ def validate_to_files(
   data_path: Pathish,
   shacl_path: Pathish,
   report_path: Pathish,
-  data_format: Optional[str] = None,
-  shacl_format: Optional[str] = None,
-  report_format: Optional[str] = None,
+  data_format: str | None = None,
+  shacl_format: str | None = None,
+  report_format: str | None = None,
   inference: str = "rdfs",
   advanced: bool = False,
   debug: bool = False,
