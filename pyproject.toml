@@ -9,7 +9,7 @@ description = "Validierung von FID RDF-Daten (pySHACL) inkl. Luigi-Task und CLI.
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "FID", email = "info@example.org" }]
+authors = [{ name = "Jan Smendek" }]
 dependencies = [
   "rdflib>=6.2",
   "pyshacl>=0.24",
