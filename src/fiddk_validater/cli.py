@@ -9,7 +9,12 @@ def main(argv: list[str] | None = None) -> None:
     description="SHACL-Validierung für FID-Daten (pySHACL).",
   )
   parser.add_argument("-d", "--data", required=True, help="Pfad zur RDF-Datendatei")
-  parser.add_argument("-s", "--shapes", default=None, help="Pfad zur SHACL-Shape-Datei (Standard: eingepackte Shapes)")
+  parser.add_argument(
+    "-s",
+    "--shapes",
+    default=None,
+    help="Pfad zur SHACL-Shape-Datei (Standard: eingepackte Shapes)",
+  )
   parser.add_argument("-r", "--report", default="shacl-report.ttl", help="Pfad zum Report (RDF)")
   parser.add_argument("--data-format", help="Format der Daten (z. B. turtle, xml, json-ld)")
   parser.add_argument("--shapes-format", help="Format der Shapes")
