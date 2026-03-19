@@ -21,7 +21,7 @@
 				- [Zusätzliche Organization Properties im FIDDK](#zusätzliche-organization-properties-im-fiddk)
 		- [edm:Place](#edmplace)
 			- [Zusätzliche Place Properties im FIDDK](#zusätzliche-place-properties-im-fiddk)
-		- [edm:Timespan](#edmtimespan)
+		- [edm:TimeSpan](#edmtimespan)
 		- [skos:Concept](#skosconcept)
 			- [Zusätzliche Concept Properties im FIDDK](#zusätzliche-concept-properties-im-fiddk)
 		- [edm:Event](#edmevent)
@@ -60,14 +60,13 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 - `rdf`: http://www.w3.org/1999/02/22-­rdf-­syntax-­ns#
 - `foaf`: http://xmlns.com/foaf/0.1/
 - `skos`: http://www.w3.org/2004/02/skos/core#
-- `rdau`: http://www.rdaregistry.info/Elements/u/
+- `rdau`: http://rdaregistry.info/Elements/u/
 - `wgs84_pos`: http://www.w3.org/2003/01/geo/wgs84_pos#
 - `crm`: http://www.cidoc-­crm.org/cidoc-­crm/
 - `cc`: http://creativecommons.org/ns#
 
 ### Zusätzliche Namespaces im FIDDK
 - `bibo`: http://purl.org/ontology/bibo/
-- `rdau`: http://rdaregistry.info/Elements/u/
 - `bf`: http://id.loc.gov/ontologies/bibframe/
 
 Der DM2E Namespace ist über den Link http://onto.dm2e.eu/schemas/dm2e/ nicht mehr erreichbar und wahrscheinlich deprecated. Er wird seit Oktober 2020 nicht mehr verwendet, und wurde durch bibframe und rdau properties vollständig ersetzt.
@@ -80,7 +79,7 @@ Der DM2E Namespace ist über den Link http://onto.dm2e.eu/schemas/dm2e/ nicht me
 ### edm:ProvidedCHO
 Beschreibt ein Cultural Heritage Object (CHO), im Fall des FIDDK ein Objekt wie z.B. Buch, Programmheft, Grafik, Fotografie, Kostüm, Theaterzettel, Plakat, Video, Brief, ...). Es steht im Gegensatz zur `edm:WebResource`, die eine digitale Repräsentation des physischen Objekts abbildet.
 - Im FID DK kann das CHO auch abstrakt sein, da es in EDM keine Klasse für das Werk oder die Produktion gibt. So werden im FIDDK Inszenierungsbeschreibungen, Produktionen und Werke ebenfalls als `edm:ProvidedCHO` abgebildet und über `dc:type` als solche gekennzeichnet.
-- Bei Angaben zu Personen, die mit dem Provided CHO in Verbindung stehen, soll bevorzugt auf Normdaten in `foaf:Person` oder `foaf:Organzation` verlinkt werden und ein Literal nur benutzt werden, wenn keine Normdaten vorhanden sind.
+- Bei Angaben zu Personen, die mit dem Provided CHO in Verbindung stehen, soll bevorzugt auf Normdaten in `foaf:Person` oder `foaf:Organization` verlinkt werden und ein Literal nur benutzt werden, wenn keine Normdaten vorhanden sind.
 - Sprachangaben für textuelle Angaben wie z.B. bei `dc:description` werden dem XML Standard entsprechend als Attribut `@xml:lang` mit *ISO 639-1* angegeben, s. https://www.w3.org/TR/REC-xml/#sec-lang-tag bzw. https://tools.ietf.org/html/rfc4646#section-2.2.1  
 - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
 
@@ -103,7 +102,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | dc:contributor | literal or reference to Agent | min 0, max unbounded | Verwenden für Beitragende zum CHO. Wenn möglich, die Kennung der beitragenden Person aus einer Normdatenquelle angeben. Anbieter mit differenzierteren Rollentypen können einen Teil auf dc:contributor und andere auf dc:creator abbilden. Für mehrere Beitragende wiederholen. <dc:contributor>Maria Callas</dc:contributor> oder als Referenz auf eine Instanz der Agent-Klasse <dc:contributor rdf:resource="http://www.example.com/MariaCallas"/> | Beitragende; allgemeinste Tätigkeitsform; Nutzung im FIDDK, wenn sonst nichts zutrifft | Beitragender | Contributor |
 | dc:coverage | literal or reference | min 0, max unbounded - eines von dc:subject, dc:type, dcterms:spatial oder dcterms:temporal ist verpflichtend | Räumliches oder zeitliches Thema des CHO. Verwenden Sie nach Möglichkeit die präziseren Eigenschaften dcterms:spatial oder dcterms:temporal. <dc:coverage>1995–1996</dc:coverage> oder <dc:coverage>Berlin</dc:coverage> oder als Referenz auf eine Instanz einer Kontextklasse, z. B. Place-Klasse <dc:coverage rdf:resource="http://sws.geonames.org/2950159"/> | bisher keine Notwendigkeit für dieses Property | - | - |
 | dc:creator | literal or reference to Agent | min 0, max unbounded | Für den/die Schöpfer*in des CHO. Wenn möglich, die Kennung aus einer Normdatenquelle angeben. Für mehrere Schöpfer*innen wiederholen. <dc:creator>Shakespeare, William</dc:creator> oder Referenz: <dc:creator rdf:resource="http://viaf.org/viaf/96994048"/> | Urheber, geistiger Schöpfer … | Urheberin | Creator |
-| ~~dc:date~~ | ~~literal or reference to Timespan~~ | ~~min 0, max unbounded~~ | ~~Nutzen für ein wichtiges Datum im Lebenszyklus des CHO. Europeana empfiehlt ISO-8601-Format. Andere EDM-Elemente können geeigneter sein (dcterms:temporal, dcterms:created, dcterms:issued). Vorsichtig wählen! <dc:date>1919</dc:date> oder Referenz auf TimeSpan.~~ | … | - | - |
+| ~~dc:date~~ | ~~literal or reference to TimeSpan~~ | ~~min 0, max unbounded~~ | ~~Nutzen für ein wichtiges Datum im Lebenszyklus des CHO. Europeana empfiehlt ISO-8601-Format. Andere EDM-Elemente können geeigneter sein (dcterms:temporal, dcterms:created, dcterms:issued). Vorsichtig wählen! <dc:date>1919</dc:date> oder Referenz auf TimeSpan.~~ | … | - | - |
 | dc:description | literal or reference | min 0, max unbounded - entweder dc:description oder dc:title ist verpflichtend | Eine Beschreibung des CHO. Wenn kein dc:description vorhanden ist, muss ein dc:title existieren. Wenn beide vorhanden sind, sollen beide angegeben werden. <dc:description>Illustrated guide ...</dc:description> | Beschreibung … | Beschreibung | Description |
 | dc:format | literal or reference to Concept | min 0, max unbounded | Begriff(e) zur Angabe des Formats des CHO oder Dateiformats eines digitalen Objekts. Bei Bedarf „3D-PDF“ verwenden. <dc:format>paper</dc:format> | Format im Sinne von Dateiformat … | - | - |
 | dc:identifier | literal | min 0, max unbounded | Eine Kennung des originalen CHO. <dc:identifier>RP-T-1952-380</dc:identifier> | Jegliche Art … | - | - |
@@ -117,7 +116,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | dc:type | literal or reference to Concept | min 0, max unbounded | Art oder Genre des CHO. Idealerweise aus kontrolliertem Vokabular. Nicht identisch zu edm:type. <dc:type>Book</dc:type> | Objektart … | | |
 | dcterms:alternative | literal | min 0, max unbounded | Alternativer Titel inkl. Übersetzungen oder Abkürzungen. <dcterms:alternative>Eight weeks ...</dcterms:alternative> | Alternative Titel … | | |
 | ~~dcterms:conformsTo~~ | ~~literal or reference~~ | ~~min 0, max unbounded~~ | ~~Standard, dem das CHO entspricht.~~ | … | | |
-| dcterms:created | literal or reference to Timespan | min 0, max unbounded | Datum der Erstellung/Herstellung des CHO. ISO-8601 empfohlen. Andere Datums-Properties können geeigneter sein. | Datum der Erstellung … | | |
+| dcterms:created | literal or reference to TimeSpan | min 0, max unbounded | Datum der Erstellung/Herstellung des CHO. ISO-8601 empfohlen. Andere Datums-Properties können geeigneter sein. | Datum der Erstellung … | | |
 | dcterms:extent | literal or reference | min 0, max unbounded | Größe, Umfang oder Dauer des CHO. <dcterms:extent>13 cm</dcterms:extent> | Umfang … | | |
 | dcterms:hasFormat | literal or reference to CHO | min 0, max unbounded | Ressource gleichen Inhalts, aber anderem Format. | Referenz auf weitere Repräsentation … | | |
 | dcterms:hasPart | literal or reference to CHO | min 0, max unbounded | Ressource, die physisch oder logisch Teil des CHO ist. Alternative zu dcterms:isPartOf. | CHO hat untergeordnete CHOs … | | |
@@ -127,7 +126,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | dcterms:isReferencedBy | literal or reference to CHO | min 0, max unbounded | Ressource, die das CHO referenziert. | Referenz … | | |
 | dcterms:isReplacedBy | literal or reference to CHO | min 0, max unbounded | Ressource, die das CHO ersetzt. | Referenz … | | |
 | dcterms:isRequiredBy | literal or reference to CHO | min 0, max unbounded | Ressource, die das CHO für Funktionalität benötigt. | Referenz … | | |
-| dcterms:issued | literal or reference to Timespan | min 0, max unbounded | Veröffentlichungs-/Erscheinungsdatum des CHO. | Erscheinungsdatum … | | |
+| dcterms:issued | literal or reference to TimeSpan | min 0, max unbounded | Veröffentlichungs-/Erscheinungsdatum des CHO. | Erscheinungsdatum … | | |
 | dcterms:isVersionOf | literal or reference to CHO | min 0, max unbounded | CHO ist eine Version eines früheren Objekts. | CHO ist andere Version … | | |
 | dcterms:medium | literal or reference to Concept | min 0, max unbounded | Material oder Trägermedium des CHO. | Material … | | |
 | dcterms:provenance | literal or reference | min 0, max unbounded | Angaben zur Besitzgeschichte seit Entstehung. | Provenienzangabe | | |
@@ -136,7 +135,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | dcterms:requires | literal or reference to CHO | min 0, max unbounded | CHO benötigt andere Ressource für Funktionalität. | CHO verlangt andere Objekte … | | |
 | dcterms:spatial | literal or reference to Place | min 0, max unbounded | Räumliche Eigenschaften des CHO, z. B. dargestellter Ort. Nicht zu verwechseln mit edm:currentLocation. | Allgemeine Ortsangabe … | | |
 | dcterms:tableOfContents | literal or reference | min 0, max unbounded | Liste der Untereinheiten des CHO. | Inhaltsverzeichnis … | | |
-| dcterms:temporal | literal or reference to Timespan | min 0, max unbounded | Zeitliche Eigenschaften des CHO, z. B. Epoche. | Allgemeine Datumsangabe … | | |
+| dcterms:temporal | literal or reference to TimeSpan | min 0, max unbounded | Zeitliche Eigenschaften des CHO, z. B. Epoche. | Allgemeine Datumsangabe … | | |
 | edm:currentLocation | literal or reference | min 0, max 1 | Aktueller physischer Standort des CHO. Nicht zu verwechseln mit dcterms:spatial. | Aktueller Standort … | | |
 | edm:hasMet | reference to Agent/Event/Place/Timespan | min 0, max unbounded | Identifikator für Entitäten, denen das CHO „begegnet“ ist. | Generische Beziehungen … | | |
 | ~~edm:hasType~~ | ~~reference or literal~~ | ~~min 0, max unbounded~~ | ~~Übergeordnete Typangabe des CHO (z. B. Painting).~~ | … | | |
@@ -283,16 +282,16 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (WebResource)
 | `dc:source` | literal or reference | min 0, max unbounded | Eine verwandte Ressource, aus der die Webressource ganz oder teilweise hervorgeht. `<dc:source>The name of the source video tape</dc:source>` | Quelle; im FIDDK bisher nicht genutzt |
 | `dc:type` | literal or reference to Concept | min 0, max unbounded | Art oder Genre der digitalen Repräsentation. Idealerweise aus kontrolliertem Vokabular. `dc:type` soll nicht identisch zu `edm:type` sein. `<dc:type>video</dc:type>` oder als Referenz `<dc:type rdf:about="http://schema.org/VideoObject"/>` | Art des Digitalisats; aktuell kein kontrolliertes Vokabular |
 | `dcterms:conformsTo` | literal or reference | min 0, max unbounded | Ein etablierter Standard, dem die Webressource entspricht. `<dcterms:conformsTo>W3C WCAG 2.0</dcterms:conformsTo>` | Standard des Digitalisats; im FIDDK bisher nicht vorgekommen |
-| `dcterms:created` | literal or reference to Timespan | min 0, max unbounded | Datum der Erstellung der Webressource. Europeana empfiehlt ISO-8601-Datumsformate (YYYY-MM-DD). `<dcterms:created>2010</dcterms:created>` oder Referenz auf eine TimeSpan-Instanz `<dc:date rdf:resource="http://semium.org/time/2010"/>` | Datum der Erstellung des Digitalisats |
+| `dcterms:created` | literal or reference to TimeSpan | min 0, max unbounded | Datum der Erstellung der Webressource. Europeana empfiehlt ISO-8601-Datumsformate (YYYY-MM-DD). `<dcterms:created>2010</dcterms:created>` oder Referenz auf eine TimeSpan-Instanz `<dc:date rdf:resource="http://semium.org/time/2010"/>` | Datum der Erstellung des Digitalisats |
 | `dcterms:extent` | literal or reference | min 0, max unbounded | Größe oder Dauer der digitalen Ressource. `<dcterms:extent>1h 26 min 41 sec</dcterms:extent>` | Maße / Größe / Dauer … |
 | `dcterms:hasPart` | reference to WebResource | min 0, max unbounded | Eine Ressource, die physisch oder logisch in der Webressource enthalten ist. `<dcterms:hasPart rdf:resource="http://www.identifier/Part"/>` | Relation zu hierarchisch untergeordneten Datensätzen |
 | `dcterms:isFormatOf` | literal or reference to WebResource | min 0, max unbounded | Eine andere Ressource, die inhaltlich weitgehend identisch ist, jedoch in einem anderen Format vorliegt. `<dcterms:isFormatOf>…</dcterms:isFormatOf>` oder als Referenz `<dcterms:isFormatOf rdf:resource="…"/>` | Referenz auf weitere Formate desselben Digitalisats |
-| `dcterms:isReferencedBy` | literal or reference to WebResource | min 0, max unbounded | Eine verwandte Ressource, die auf diese Webressource verweist oder sie zitiert. Bei IIIF kann dieses Property verwendet werden, um ein `edm:WebResource` mit einem Manifest zu verknüpfen. | Für Ressourcen, die dieses Digitalisat referenzieren (z. B. IIIF) |
+| `dcterms:isReferencedBy` | literal or reference | min 0, max unbounded | Eine verwandte Ressource, die auf diese Webressource verweist oder sie zitiert. Bei IIIF kann dieses Property verwendet werden, um ein `edm:WebResource` mit einem Manifest zu verknüpfen. | Für Ressourcen, die dieses Digitalisat referenzieren (z. B. IIIF) |
 | `dcterms:isPartOf` | reference to WebResource | min 0, max unbounded | Eine Ressource, in der diese Webressource physisch oder logisch enthalten ist. Kann für hierarchische Abbildungen genutzt werden. Allerdings nicht parallel zu ProvidedCHO-Hierarchien. | Relation zu hierarchisch übergeordneten Datensätzen |
-| `dcterms:issued` | literal or reference to Timespan | min 0, max unbounded | Datum der formalen Veröffentlichung der Webressource. ISO-8601 empfohlen. `<dcterms:issued>1999</dcterms:issued>` oder TimeSpan-Referenz. | Veröffentlichungsdatum (üblicherweise nicht bekannt) |
+| `dcterms:issued` | literal or reference to TimeSpan | min 0, max unbounded | Datum der formalen Veröffentlichung der Webressource. ISO-8601 empfohlen. `<dcterms:issued>1999</dcterms:issued>` oder TimeSpan-Referenz. | Veröffentlichungsdatum (üblicherweise nicht bekannt) |
 | `edm:isNextInSequence` | reference to WebResource | min 0, max unbounded | Wenn ein CHO mehrere Webressourcen hat (`edm:hasView`), kann dieses Property die Reihenfolge abbilden. Jede Webressource (außer der ersten) verweist auf die vorherige. | Reihenfolge von Digitalisaten (z. B. Seitenfolge) |
 | `edm:rights` | reference (URI) | min 0, max 1 | Gibt Urheber-, Nutzungs- und Zugriffsrechte für die digitale Repräsentation an. Europeana verlangt eine URI aus den definierten Rechteangaben („available-rights-statements“). Einträge müssen exakt der Vorgabe entsprechen (oft **http** statt https). | Rechteangaben gem. Europeana; im FIDDK nicht umsetzbar |
-| `owl:sameAs` | reference to WebResource | min 0, max unbounded | URI einer anderen Webrepräsentation derselben Ressource. `<owl:sameAs rdf:resource="urn:soundcloud:150424305"/>` | Link zu anderer Repräsentation desselben Digitalisats |
+| `owl:sameAs` | reference | min 0, max unbounded | URI einer anderen Webrepräsentation derselben Ressource. `<owl:sameAs rdf:resource="urn:soundcloud:150424305"/>` | Link zu anderer Repräsentation desselben Digitalisats |
 | ~~`svcs:has_service`~~ | ~~reference~~ | ~~min 0, max unbounded~~ | – | – |
 
 
@@ -334,8 +333,8 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
 | `edm:wasPresentAt` | reference to Event | min 0, max unbounded | – | Verweis zu einem Ereignis, an dem die Person beteiligt war … |
 | ~~`foaf:name`~~ | ~~literal~~ | ~~min 0, max unbounded~~ | ~~Einfacher Textstring für den Namen der Person.~~ | … |
 | ~~`rdaGr2:biographicalInformation`~~ `rdau:P60492` | literal | min 0, max unbounded | Informationen zum Leben oder zur Geschichte der Person. | nach rdau gemappt … |
-| ~~`rdaGr2:dateOfBirth`~~ `rdau:P60599` | literal or reference to Timespan | min 0, max 1 | Geburtsdatum der Person. Europeana empfiehlt ISO-8601-Format. | nach rdau gemappt … |
-| ~~`rdaGr2:dateOfDeath`~~ `rdau:P60598` | literal or reference to Timespan | min 0, max 1 | Sterbedatum der Person. Europeana empfiehlt ISO-8601-Format. | nach rdau gemappt … |
+| ~~`rdaGr2:dateOfBirth`~~ `rdau:P60599` | literal or reference to TimeSpan | min 0, max 1 | Geburtsdatum der Person. Europeana empfiehlt ISO-8601-Format. | nach rdau gemappt … |
+| ~~`rdaGr2:dateOfDeath`~~ `rdau:P60598` | literal or reference to TimeSpan | min 0, max 1 | Sterbedatum der Person. Europeana empfiehlt ISO-8601-Format. | nach rdau gemappt … |
 | ~~`rdaGr2:placeOfBirth`~~ `rdau:P60594` | literal or reference to Place | min 0, max 1 | Geburtsort der Person (Ort, Region, Land). | nach rdau gemappt … |
 | ~~`rdaGr2:placeOfDeath`~~ `rdau:P60592` | literal or reference to Place | min 0, max 1 | Sterbeort der Person. | nach rdau gemappt … |
 | ~~`rdaGr2:gender`~~ `rdau:P60531` | literal or reference | min 0, max 1 | Geschlecht, mit dem sich die Person identifiziert. | nach rdau gemappt … |
@@ -351,7 +350,7 @@ Properties | Value type | Cardinality | FIDDK Note
 `foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild der Person
 
 #### foaf:Organization
-Hier auf Basis von `foaf:Organzation` der Object Templates, im Original EDM gibt es `foaf:Organzation` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
+Hier auf Basis von `foaf:Organization` der Object Templates, im Original EDM gibt es `foaf:Organization` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
 
 ![Organization](images/Organization.png)
 
@@ -417,26 +416,25 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Place)
 #### Zusätzliche Place Properties im FIDDK
 - keine
 
-### edm:Timespan
-`edm:Timespan` wird im FIDDK aktuell nicht genutzt, da Informationen über Epochen bei den Datengeber_innen bisher nicht vorliegen. In der GND werden Angaben zu Epochen als Untergruppe von Schlagwort abgebildet ("Historisches Einzelereignis oder Epoche"). Daher werden im FIDDK vorkommende GNDs dieser Kategorie ebenfalls innerhalb von `skos:Concept` abgebildet.
+### edm:TimeSpan
+`edm:TimeSpan` wird im FIDDK zur sauberen Modellierung zeitlicher Angaben und Unsicherheiten eingesetzt. Zeitspannen (Ereignisse, Entstehung, Veröffentlichung, Epochen/Perioden) werden als eigene Ressourcen modelliert, sodass maschinenlesbare Normalisierungen und menschenlesbare Anzeigen getrennt gepflegt werden können.
 
-Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Timespan)
-- `edm:Timespan` wird im FIDDK nicht eingesetzt; Epochen/Perioden werden als `skos:Concept` modelliert.
-- Zeitangaben werden als ISO‑8601‑Subset (Solr‑Format) in Literalen geführt; Unsicherheiten via `rdfs:label` (siehe „Datumsformatierung“/„Modellierung von Unsicherheit“).
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (TimeSpan)
+- FIDDK verwendet `edm:TimeSpan` für unsichere/ungefähre Datierungen: Normalisierung über `edm:begin`/`edm:end`, Anzeigeform z. B. über `skos:prefLabel` („ca. 1810“).
+- Epochen/Perioden können als `edm:TimeSpan` modelliert werden; bei Bedarf kann zusätzlich ein `skos:Concept` verlinkt werden (z. B. GND-Epoche) – die Zeitgrenzen bleiben am `edm:TimeSpan`.
+- Datumsangaben als reine Literale mit Attribut-Annotationen (z. B. `rdfs:label`) werden nicht mehr verwendet.
 
-~~Properties~~ | ~~Value type~~ | ~~Cardinality~~ | EDM Note (Deutsch)
---------------|----------------|----------------|--------------------
-`~~skos:prefLabel~~` | ~~literal~~ | ~~min 0, max 1 per lang tag~~ | Die bevorzugte Benennungsform einer Zeitspanne oder Epoche. Obwohl die maximale Wiederholung mit 1 angegeben ist, wird dies als 1 **pro Sprach-Tag** verstanden. Mindestens ein `skos:prefLabel` SOLLTE angegeben werden; mehrere Varianten mit Sprachkennzeichnung werden für Übersetzungen und Sprachvarianten empfohlen. `<skos:prefLabel xml:lang="en">Roman Empire</skos:prefLabel>`
-`~~skos:altLabel~~` | ~~literal~~ | ~~min 0, max unbounded~~ | Alternative Benennungen der Zeitspanne oder Epoche. `<skos:altLabel xml:lang="fr">Empire romain (27 avant J.-C.–476 après J.-C.)</skos:altLabel>`
-`~~skos:note~~` | ~~literal~~ | ~~min 0, max unbounded~~ | Informationen zur Zeitspanne/Epoche. `<skos:note>…</skos:note>`
-`~~dcterms:hasPart~~` | ~~reference to Timespan~~ | ~~min 0, max unbounded~~ | Verweis auf eine Zeitspanne, die Teil der beschriebenen Zeitspanne ist.
-`~~dcterms:isPartOf~~` | ~~reference to Timespan~~ | ~~min 0, max unbounded~~ | Verweis auf eine übergeordnete Zeitspanne, zu der die beschriebene gehört.
-`~~edm:begin~~` | ~~literal~~ | ~~min 0, max 1~~ | Beginn der Zeitspanne. Europeana empfiehlt ISO-8601-Format (Jahr-Monat-Tag, sofern möglich). Die Kombination aus `edm:begin` und `edm:end` wird empfohlen. `<edm:begin>27 BC</edm:begin>`
-`~~edm:end~~` | ~~literal~~ | ~~min 0, max 1~~ | Ende der Zeitspanne. Europeana empfiehlt ISO-8601-Format. Verwendung zusammen mit `edm:begin` empfohlen. `<edm:end>476 AD</edm:end>`
-`~~edm:isNextInSequence~~` | ~~reference to Timespan~~ | ~~min 0, max unbounded~~ | Kann genutzt werden, um eine Abfolge historischer Perioden darzustellen. Unterstützt die korrekte Darstellung zeitlicher Sequenzen. `<edm:isNextInSequence rdf:resource="http://semium.org/time/roman_republic"/>`
-`~~crm:P79_beginning_is_qualified_by~~` | ~~literal~~ | ~~min 0, max unbounded~~ | Zusätzliche qualifizierende Angaben zum Beginn der Zeitspanne.
-`~~crm:P80_end_is_qualified_by~~` | ~~literal~~ | ~~min 0, max unbounded~~ | Zusätzliche qualifizierende Angaben zum Ende der Zeitspanne.
-`~~owl:sameAs~~` | ~~reference to Timespan~~ | ~~min 0, max unbounded~~ | URI derselben Zeitspanne. `<owl:sameAs rdf:resource="http://semium.org/time/roman_empire"/>`
+| Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
+|-----------|------------|-------------|---------------------|------------|
+| `skos:prefLabel` | literal | min 0, max 1 per lang tag | Bevorzugte Benennung der Zeitspanne/Epoche. | Für Anzeigeformen wie „ca. 1810“, „Sommer 2002“ |
+| `skos:altLabel` | literal | min 0, max unbounded | Alternative Benennungen. | Optional |
+| `skos:note` | literal | min 0, max unbounded | Informationen zur Zeitspanne. | Optional |
+| `edm:begin` | literal | min 0, max 1 | Beginn der Zeitspanne (ISO‑8601, wenn möglich). | Normalisierte Startgrenze |
+| `edm:end` | literal | min 0, max 1 | Ende der Zeitspanne (ISO‑8601, wenn möglich). | Normalisierte Endgrenze |
+| `dcterms:hasPart` | reference to TimeSpan | min 0, max unbounded | Zeitspanne, die Teil der beschriebenen ist. | Für Unterperioden |
+| `dcterms:isPartOf` | reference to TimeSpan | min 0, max unbounded | Übergeordnete Zeitspanne. | Für Überperioden |
+| `edm:isNextInSequence` | reference to TimeSpan | min 0, max unbounded | Vorgänger in zeitlicher Sequenz. | Für Periodenfolgen |
+| `owl:sameAs` | reference | min 0, max unbounded | URI derselben Zeitspanne. | Verweis auf externe Identifikatoren |
 
 
 ### skos:Concept
@@ -539,13 +537,21 @@ Im FIDDK werden alle Datumsangaben als Zeitspanne angegeben (auch wenn es nur ei
 - `-0009-01-01T00:00:00Z_-0009-12-31T23:59:59Z` (Jahr 10 v.Chr. (Jahr 0 wird als Jahr 1 v.Chr. betrachtet))
 
 ## Modellierung von Unsicherheit
-Im FIDDK werden Unsicherheiten durch das Attribut `@rdfs:label` abgebildet, das an Orts- oder Datumsangaben angehängt werden kann, sofern diese Unsicherheiten enthalten. Unsicherheiten können Angaben in eckigen Klammern [] und/oder mit Fragezeichen sein sowie beispielsweise unsichere Angaben bei Datumsangaben mit "ca./vor/um/nach...".<br>
-Die Werte in `@rdfs:label` entsprechen der im Original als Literal angegebenen Unsicherheit, sodass diese 1:1 im FID Portal angezeigt werden kann. Neben diesem Attribut wird wenn möglich eine standardisierste Version angeboten. <br>
-Dies folgt keinem Standard, sondern ist ein Versuch die Unsicherheiten, die in den Ursprungsdaten vorhanden sind, abzubilden.
+Im FIDDK werden Unsicherheiten nicht mehr über Attribute wie `@rdfs:label` an Property-Elementen modelliert. Stattdessen werden unsichere oder ungefähre Angaben über `edm:TimeSpan`-Ressourcen abgebildet:
+- Maschinenlesbare Normalisierung: `edm:begin` und `edm:end` (ISO‑8601‑Subset, vgl. Abschnitt „Datumsformatierung“).
+- Menschenlesbare Anzeigeform: `skos:prefLabel` (z. B. „ca. 1810“, „Sommer 2002“).
+
+Für Ortsunsicherheiten (z. B. „[Hamburg?]“) wird der normierte Ort weiterhin als Referenz verlinkt; optional kann zusätzlich ein Literal am selben Property ergänzt werden, das die unsichere Anzeigeform enthält.
 
 ### Beispiele
-- `<dcterms:issued rdfs:label="ca. 1810">1810-01-01T00:00:00Z_1810-12-31T23:59:59Z</dcterms:issued>`
-- `<edm:happenedAt rdf:resource="http://www.performing-arts.eu/place/gnd_4023118-5" rdfs:label="[Hamburg?]"/>`
+- Referenzierte TimeSpan:
+  - `dcterms:issued` → Ressource vom Typ `edm:TimeSpan` mit:
+    - `edm:begin` = `1810-01-01T00:00:00Z`
+    - `edm:end` = `1810-12-31T23:59:59Z`
+    - `skos:prefLabel` = „ca. 1810“
+- Ereignisort mit optionaler unsicherer Textform:
+  - `edm:happenedAt rdf:resource="http://www.performing-arts.eu/place/gnd_4023118-5"`
+  - zusätzlich: `edm:happenedAt` als Literal „[Hamburg?]“ (falls für Anzeige benötigt)
 
 ## XML Schema
 XML Schema des FIDDK basiert auf [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
