@@ -1,46 +1,48 @@
+<a id="top"></a>
 # Datenmodell FID DK - Application Profile EDM
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Datenmodell FID DK - Application Profile EDM](#datenmodell-fid-dk-application-profile-edm)
+- [Datenmodell FID DK - Application Profile EDM](#top)
 	- [Allgemeines](#allgemeines)
 	- [Namespaces](#namespaces)
-		- [Zusätzliche Namespaces im FID DK](#zusätzliche-namespaces-im-fid-dk)
+		- [Zusätzliche Namespaces im FID DK](#namespaces-extra)
 	- [EDM Core Classes](#edm-core-classes)
-		- [edm:ProvidedCHO](#edmprovidedcho)
-			- [Zusätzliche ProvidedCHO Properties im FIDDK](#zusätzliche-providedcho-properties-im-fiddk)
-		- [ore:Aggregation](#oreaggregation)
-			- [Zusätzliche Aggregation Properties im FIDDK](#zusätzliche-aggregation-properties-im-fiddk)
-		- [edm:WebResource](#edmwebresource)
-			- [Zusätzliche Webresource Properties im FIDDK](#zusätzliche-webresource-properties-im-fiddk)
+		- [edm:ProvidedCHO](#edm-providedcho)
+			- [Zusätzliche ProvidedCHO Properties im FID DK](#providedcho-extra-props)
+		- [ore:Aggregation](#ore-aggregation)
+			- [Zusätzliche Aggregation Properties im FID DK](#aggregation-extra-props)
+		- [edm:WebResource](#edm-webresource)
+			- [Zusätzliche Webresource Properties im FID DK](#webresource-extra-props)
 	- [EDM Contextual Classes](#edm-contextual-classes)
-		- [edm:Agent](#edmagent)
-			- [foaf:Person](#foafperson)
-				- [Zusätzliche Person Properties im FIDDK](#zusätzliche-person-properties-im-fiddk)
-			- [foaf:Organization](#foaforganization)
-				- [Zusätzliche Organization Properties im FIDDK](#zusätzliche-organization-properties-im-fiddk)
-		- [edm:Place](#edmplace)
-			- [Zusätzliche Place Properties im FIDDK](#zusätzliche-place-properties-im-fiddk)
-		- [edm:TimeSpan](#edmtimespan)
-		- [skos:Concept](#skosconcept)
-			- [Zusätzliche Concept Properties im FIDDK](#zusätzliche-concept-properties-im-fiddk)
-		- [edm:Event](#edmevent)
-			- [Zusätzliche Event Properties im FIDDK](#zusätzliche-event-properties-im-fiddk)
+		- [edm:Agent](#edm-agent)
+			- [foaf:Person](#foaf-person)
+				- [Zusätzliche Person Properties im FID DK](#person-extra-props)
+			- [foaf:Organization](#foaf-organization)
+				- [Zusätzliche Organization Properties im FID DK](#organization-extra-props)
+		- [edm:Place](#edm-place)
+			- [Zusätzliche Place Properties im FID DK](#place-extra-props)
+		- [edm:TimeSpan](#edm-timespan)
+		- [skos:Concept](#skos-concept)
+			- [Zusätzliche Concept Properties im FID DK](#concept-extra-props)
+		- [edm:Event](#edm-event)
+			- [Zusätzliche Event Properties im FID DK](#event-extra-props)
 	- [Statistik](#statistik)
 	- [Identifier](#identifier)
-		- [Format](#format)
+		- [Format](#identifier-format)
 	- [Datumsformatierung](#datumsformatierung)
 		- [Beispiele](#beispiele)
 	- [Modellierung von Unsicherheit](#modellierung-von-unsicherheit)
 	- [XML Schema](#xml-schema)
-	- [Beispieldatensätze](#beispieldatensätze)
-	- [Aktuell ungelöste Probleme](#aktuell-ungelöste-probleme)
+	- [Beispieldatensätze](#beispieldatensaetze)
+	- [Aktuell ungelöste Probleme](#aktuell-ungeloeste-probleme)
 
 <!-- /TOC -->
 
 **Version:** 1.0 <br>
 **Autor_in:** Julia Beck, Universitätsbibliothek Johann Christian Senckenberg Frankfurt am Main
 
+<a id="allgemeines"></a>
 ## Allgemeines
 - Nachnutzung des Metadatenstandards [EDM (Europeana Data Model)](https://pro.europeana.eu/page/edm-documentation) + universell (GLAM) + erweiterbar + flexibel + RDF basiert
 - dieses Application Profile basiert auf der Originaldokumentation von [EDM](https://pro.europeana.eu/page/edm-documentation) entsprechend der [Mapping Guidelines](https://europeana.atlassian.net/wiki/spaces/EF/pages/987791389/EDM+-+Mapping+guidelines), der [EDM Object Templates](https://github.com/europeana/corelib/wiki/EDMObjectTemplatesProviders) und des [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
@@ -51,6 +53,7 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 - FID DK Note dient nur der Erklärung und entspricht nicht zwingend der Anzeige im FID Portal.
 - :warning: Dies ist ein Draft und kann sich noch ändern
 
+<a id="namespaces"></a>
 ## Namespaces
 - `dc`: http://purl.org/dc/elements/1.1/
 - `dcterms`: http://purl.org/dc/terms/
@@ -65,17 +68,20 @@ Hinweise zu den Änderungen im FID DK (Application Profile, Änderungen sind **f
 - `crm`: http://www.cidoc-crm.org/cidoc-crm/
 - `cc`: http://creativecommons.org/ns#
 
+<a id="namespaces-extra"></a>
 ### Zusätzliche Namespaces im FID DK
 - `bibo`: http://purl.org/ontology/bibo/
 - `bf`: http://id.loc.gov/ontologies/bibframe/
 
 Der DM2E Namespace ist über den Link http://onto.dm2e.eu/schemas/dm2e/ nicht mehr erreichbar und wahrscheinlich deprecated. Er wird seit Oktober 2020 nicht mehr verwendet, und wurde durch bibframe und rdau properties vollständig ersetzt.
 
+<a id="edm-core-classes"></a>
 ## EDM Core Classes
 `edm:ProvidedCHO`, `ore:Aggregation` und `edm:WebResource` repräsentieren Informationen über das Cultural Heritage Object. Im Gegensatz zu den kontextuellen Klassen, die Personen/Körperschaften, Orte, Ereignisse, Konzepte oder Epochen beschreiben, die mit dem Objekt in Relation stehen.
 
 ![EDM Classes](images/Classes.png)
 
+<a id="edm-providedcho"></a>
 ### edm:ProvidedCHO
 Beschreibt ein Cultural Heritage Object (CHO), im Fall des FID DK ein Objekt wie z.B. Buch, Programmheft, Grafik, Fotografie, Kostüm, Theaterzettel, Plakat, Video, Brief, ...). Es steht im Gegensatz zur `edm:WebResource`, die eine digitale Repräsentation des physischen Objekts abbildet.
 - Im FID DK kann das CHO auch abstrakt sein, da es in EDM keine Klasse für das Werk oder die Produktion gibt. So werden im FID DK Inszenierungsbeschreibungen, Produktionen und Werke ebenfalls als `edm:ProvidedCHO` abgebildet und über `dc:type` als solche gekennzeichnet.
@@ -153,6 +159,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | rdf:type | reference | min 0, max unbounded | — | — | | |
 
 
+<a id="providedcho-extra-props"></a>
 #### Zusätzliche ProvidedCHO Properties im FID DK
 - Sofern nicht anders angegeben, wird der Originaldefinition der Property gefolgt.
 - RDAU hätte noch weitere interessante Tätigkeitsproperties und auch um Objektbeziehungen genauer zu definieren (ist choreografische Adaption von..., Drehbuch basiert auf..., hat Libretto... usw.). So detailliert wird es jedoch selten von Datengeber_innen erfasst.
@@ -227,6 +234,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | `rdau:P61085` | literal or reference to Agent | min 0, max unbounded | „hat Texteditor*in“ – Überarbeitet Text nach Standards (Stil, Klarheit, Konsistenz). | Redakteur_in |
 
 
+<a id="ore-aggregation"></a>
 ### ore:Aggregation
 Verbindet ein Objekt (provided CHO) mit den zugehörigen Webresourcen. Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
 
@@ -255,9 +263,11 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Aggregation)
 | ~~`edm:ugc`~~ | ~~literal (true)~~ | ~~min 0, max 1~~ | ~~Pflichtfeld für nutzergenerierte Inhalte (Crowdsourcing usw.), Wert muss „true“ sein.~~ | kommt im FIDDK nicht vor |
 
 
+<a id="aggregation-extra-props"></a>
 #### Zusätzliche Aggregation Properties im FID DK
 - keine
 
+<a id="edm-webresource"></a>
 ### edm:WebResource
 Eine digitale Repräsentation des vorliegenden provided CHO. - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
 
@@ -295,13 +305,16 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (WebResource)
 | ~~`svcs:has_service`~~ | ~~reference~~ | ~~min 0, max unbounded~~ | – | – |
 
 
+<a id="webresource-extra-props"></a>
 #### Zusätzliche Webresource Properties im FID DK
 - keine
 
+<a id="edm-contextual-classes"></a>
 ## EDM Contextual Classes
 Die kontextuellen Klassen `edm:Agent`, `edm:Place`, `edm:TimeSpan`, `edm:Event` und `skos:Concept` beschreiben das *Wer?/Wo?/Wann?/Was?* eines `edm:ProvidedCHO`, sofern dies eindeutig in Form von Normdaten identifiziert werden kann und nicht nur als Literal angegeben ist.
 - Sofern nicht anders angegeben, wird der Originaldefinition in EDM Note gefolgt.
 
+<a id="edm-agent"></a>
 ### edm:Agent
 In EDM wird `edm:Agent` für "[...] people, either individually or in groups [...]" genutzt. Im FIDDK wird `edm:Agent` nur genutzt, wenn nicht bekannt oder aus den vorliegenden Daten nicht ersichtlich ist, ob es sich um eine Person oder Körperschaft handelt. Für gewöhnlich ist dies aber bekannt, weshalb im FIDDK `edm:Agent` kaum eine Rolle spielt und stattdessen die "genaueren" `foaf:Person` und `foaf:Organization` genutzt werden.
 
@@ -309,6 +322,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Agent)
 - FIDDK bevorzugt `foaf:Person` und `foaf:Organization`; `edm:Agent` dient nur als Fallback, wenn die Unterscheidung Person/Körperschaft nicht möglich ist.
 - Keine zusätzlichen Agent-spezifischen Properties im Einsatz; Benennungen/Rollen werden in den spezifischen Klassen modelliert.
 
+<a id="foaf-person"></a>
 #### foaf:Person
 Hier auf Basis von `edm:Agent`, im Original EDM gibt es `foaf:Person` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
 
@@ -342,6 +356,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
 | `owl:sameAs` | reference to Agent (Person) | min 0, max unbounded | Eine weitere URI derselben Person. `<owl:sameAs rdf:resource="http://www.identifier/sameResourceElsewhere"/>` | Link zur GND oder weiteren Dubletten |
 
 
+<a id="person-extra-props"></a>
 ##### Zusätzliche Person Properties im FID DK
 
 Properties | Value type | Cardinality | FIDDK Note
@@ -349,6 +364,7 @@ Properties | Value type | Cardinality | FIDDK Note
 `rdau:P60095` | reference to Agent (Orga) | min 0, max unbounded | "has affiliation", Affiliation, Beziehung einer Person zu einer Organisation (Anstellung, Mitglied, ...)
 `foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild der Person
 
+<a id="foaf-organization"></a>
 #### foaf:Organization
 Hier auf Basis von `foaf:Organization` der Object Templates, im Original EDM gibt es `foaf:Organization` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
 
@@ -383,12 +399,14 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Organization)
 | `owl:sameAs` | reference to Agent (Orga) | min 0, max unbounded | – | Link zu GND oder weiteren Dubletten |
 
 
+<a id="organization-extra-props"></a>
 ##### Zusätzliche Organization Properties im FID DK
 Properties | Value type | Cardinality | FIDDK Note
 ------------|------------|------------|------------|
 `edm:isNextInSequence` | reference to Agent (Orga) | min 0, max unbounded | Für die Abbildung von Vorgänger/Nachfolger Körperschaften (zeitlich)
 `foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild der Körperschaft
 
+<a id="edm-place"></a>
 ### edm:Place
 Ein Ort kann im FIDDK auch ein Theatergebäude sein (im Unterschied zur Institution des Theaters als Körperschaften).
 
@@ -413,9 +431,11 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Place)
 | `edm:isNextInSequence` | reference to Place | min 0, max unbounded | Kann zur Darstellung einer zeitlichen Abfolge von Ortsentitäten genutzt werden, z. B. historischer Entwicklungsschichten (wie Troja). Unterstützt korrekte Anzeige in Sequenzen/Hierarchien. | Für die Abbildung historischer Orte |
 | `owl:sameAs` | reference to Place | min 0, max unbounded | URI eines identischen Ortsdatensatzes. `<owl:sameAs rdf:resource="http://sws.geonames.org/2635167/"/>` | Link zu GND-Geografikum oder anderen Dubletten |
 
+<a id="place-extra-props"></a>
 #### Zusätzliche Place Properties im FIDDK
 - keine
 
+<a id="edm-timespan"></a>
 ### edm:TimeSpan
 `edm:TimeSpan` wird im FID DK zur sauberen Modellierung zeitlicher Angaben und Unsicherheiten eingesetzt. Zeitspannen (Ereignisse, Entstehung, Veröffentlichung, Epochen/Perioden) werden als eigene Ressourcen modelliert, sodass maschinenlesbare Normalisierungen und menschenlesbare Anzeigen getrennt gepflegt werden können.
 
@@ -437,6 +457,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (TimeSpan)
 | `owl:sameAs` | reference | min 0, max unbounded | URI derselben Zeitspanne. | Verweis auf externe Identifikatoren |
 
 
+<a id="skos-concept"></a>
 ### skos:Concept
 Der FID DK stützt sich bei Konzepten vor allem auf Sachbegriffe der GND und deren Relationen. Konzepte im FID DK können auch Epochenangaben sein.
 
@@ -461,9 +482,11 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Concept)
 | ~~`skos:inScheme`~~ | ~~reference to ConceptScheme~~ | ~~min 0, max unbounded~~ | ~~URI eines Konzeptschema.~~ | keine Schemas im FIDDK |
 
 
+<a id="concept-extra-props"></a>
 #### Zusätzliche Concept Properties im FID DK
 - keine
 
+<a id="edm-event"></a>
 ### edm:Event
 Events basieren entweder auf der GND (Konferenz oder Ereignis bzw. Konferenz-/Ereignisfolge) oder auf strukturierten oder Freitextangaben der Datengeber_innen.
 
@@ -490,6 +513,7 @@ Properties | Value type | Cardinality | EDM Note | FIDDK Note
 `edm:hasType` |	literal or reference to Concept | min 0, max unbounded | - | Art des Ereignises (Premiere, ...) :arrow_right: Basierend auf GND Sachbegriffen (:warning:noch kein fertiges Vokabular)
 `edm:isRelatedTo` |	reference	to Event **or literal** | min 0, max unbounded | - | Verweis auf vergleichbare / in Beziehung stehende Ereignisse
 
+<a id="event-extra-props"></a>
 #### Zusätzliche Event Properties im FID DK
 - alle Tätigkeitsproperties, die auch zu `edm:ProvidedCHO` hinzugefügt wurden (s.o.)
 - sowie:
@@ -499,10 +523,12 @@ Properties | Value type | Cardinality | FIDDK Note
 `foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild des Ereignisses
 `foaf:homepage` |	reference | min 0, max 1 | Homepage zum Ereignis
 
+<a id="statistik"></a>
 ## Statistik
 Welche Properties werden tatsächlich in welcher Anzahl genutzt?
 TODO
 
+<a id="identifier"></a>
 ## Identifier
 - Jede Resource muss einen eigenen Unique Resource Identifier (URI) haben, um sie miteinander verlinkbar zu machen.
 - Der Identifier ist in `@rdf:about` der jeweiligen Resource angegeben und bei einem Link von einer Resource zu einer anderen wird `@rdf:resource` verwendet.
@@ -510,6 +536,7 @@ TODO
 - Identifier von Normdaten basieren auf der GND und potentiell auch auf anderen Normdatenanbietern wie Geonames oder VIAF. Falls es Normdaten eines bestimmten Datengebers sind, die noch nicht als GND o.ä. vorliegen, dann basieren die Identifier auf den lokalen IDs der Datengeber_innen.
 - Nicht alle Links sind aktuell tatsächlich abrufbar, sondern nur `Record`, `agent` und `event`
 
+<a id="identifier-format"></a>
 ### Format
 - ProvidedCHO: `http-Adresse/Typ/DataProviderKürzel_LokalerIdentifier`
 - Normdaten: `http-Adresse/Typ/NormdatenKürzel_Identifier`
@@ -524,11 +551,13 @@ Class | Type | Example Properties | Example Link | Note
 `edm:Place` | *place* | `edm:happenedAt` in `edm:Event` oder `dcterms:spatial` in `edm:ProvidedCHO` | http://performing-arts.eu/place/gnd_1234 oder http://performing-arts.eu/place/TMD_1234 | :warning: Link aktuell nicht weitergeleitet/funktionsfähig
 `skos:Concept` | *concept* | `dc:subject` in `edm:ProvidedCHO` | http://performing-arts.eu/concept/gnd_1234 oder http://performing-arts.eu/concept/TMD_1234 | :warning: Link aktuell nicht weitergeleitet/funktionsfähig
 
+<a id="datumsformatierung"></a>
 ## Datumsformatierung
 Im RDF werden Datumsangaben über Ressourcen vom Typ `edm:TimeSpan` mit den Properties `edm:begin` und `edm:end` modelliert. Für die Indexierung und Suche in Solr wird zusätzlich ein Intervall-String verwendet; das Datumsformat ist dabei ein Subset von ISO-8601 entsprechend der in [Solr verwendeten Datumsformatierung](https://lucene.apache.org/solr/guide/8_6/working-with-dates.html). Bei Daten vor Christus (BC) wird ein `-` vorangestellt. Bei uneingeschränkten Daten, z.B. bei Zeitschriften ("seit 1987","1987-","bis 1987","-1987") wird ein `*` benutzt. Völlig unklare Werte wie "früher" werden nicht abgebildet. Für die Modellierung unsicherer Angaben wie "Sommer 2002" oder "ca. 1998" siehe [Modellierung von Unsicherheit](#modellierung-von-unsicherheit).
 
 `YYYY-MM-DDThh:mm:ssZ_YYYY-MM-DDThh:mm:ssZ`
 
+<a id="beispiele"></a>
 ### Beispiele
 - `2020-06-21T00:00:00Z_2020-06-21T23:59:59Z` (21. Juni 2020)
 - `1810-01-01T00:00:00Z_1810-12-31T23:59:59Z` (Jahr 1810)
@@ -536,6 +565,7 @@ Im RDF werden Datumsangaben über Ressourcen vom Typ `edm:TimeSpan` mit den Prop
 - `1994-01-01T00:00:00Z_*` (1994-)
 - `-0009-01-01T00:00:00Z_-0009-12-31T23:59:59Z` (Jahr 10 v.Chr. (Jahr 0 wird als Jahr 1 v.Chr. betrachtet))
 
+<a id="modellierung-von-unsicherheit"></a>
 ## Modellierung von Unsicherheit
 Im FID DK werden Unsicherheiten nicht mehr über Attribute wie `@rdfs:label` an Property-Elementen modelliert. Stattdessen werden unsichere oder ungefähre Angaben über `edm:TimeSpan`-Ressourcen abgebildet:
 - Maschinenlesbare Normalisierung: `edm:begin` und `edm:end` (ISO‑8601‑Subset, vgl. Abschnitt „Datumsformatierung“).
@@ -553,15 +583,18 @@ Für Ortsunsicherheiten (z. B. „[Hamburg?]“) wird der normierte Ort weiter
   - `edm:happenedAt rdf:resource="http://www.performing-arts.eu/place/gnd_4023118-5"`
   - zusätzlich: `edm:happenedAt` als Literal „[Hamburg?]“ (falls für Anzeige benötigt)
 
+<a id="xml-schema"></a>
 ## XML Schema
 XML Schema des FID DK basiert auf [EDM XML Schema](https://github.com/europeana/corelib/tree/develop/corelib-edm-definitions/src/main/resources/eu)
 
 **TODO**
 
+<a id="beispieldatensaetze"></a>
 ## Beispieldatensätze
 
 **TODO**
 
+<a id="aktuell-ungeloeste-probleme"></a>
 ## Aktuell ungelöste Probleme
 - Bühnenbildner (nicht in rdau vorhanden)
 - ~~Signatur~~
