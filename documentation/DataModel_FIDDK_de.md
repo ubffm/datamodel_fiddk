@@ -257,6 +257,16 @@ Eine digitale Repräsentation des vorliegenden provided CHO. - Sofern nicht ande
 
 ![WebResource](images/WebResource.png)
 
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (WebResource)
+- FIDDK verwendet das optionale edm:rights auf Ebene der WebResource derzeit nicht; Rechtehinweise der Datengeber_innen werden über dc:rights erfasst. Europeana empfiehlt für edm:rights eine URI aus den „available-rights-statements“ (http, nicht https); Rechte auf WebResource-Ebene überschreiben Angaben auf Aggregationsebene.
+- dc:format wird als MIME Type angegeben (z. B. image/jpeg).
+- Für dc:type der WebResource wird aktuell kein kontrolliertes Vokabular eingesetzt; gemäß EDM sollten Begriffe idealerweise aus einem kontrollierten Vokabular stammen und dc:type der WebResource sollte nicht identisch zu edm:type sein.
+- dcterms:isReferencedBy wird im FIDDK explizit zur Verknüpfung mit IIIF-Manifesten genutzt.
+- dc:creator und dc:source werden in der Praxis selten bzw. nicht genutzt (optional).
+- svcs:has_service wird nicht verwendet (deprecated).
+- Hierarchien: dcterms:isPartOf/dcterms:hasPart können für WebResource-Hierarchien genutzt werden; nicht parallel zu ProvidedCHO-Hierarchien (EDM-Vorgabe, vom FIDDK beachtet).
+- Europeana-Validierung verlangt eine feste Property-Reihenfolge in Datensätzen; intern im FIDDK besteht keine besondere Reihenfolgeanforderung.
+
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `dc:creator` | literal or reference to Agent | min 0, max unbounded | Für den/die Ersteller*in der Webressource. Wenn möglich, die Kennung des/der Ersteller*in aus einer Normdatenquelle angeben. Wiederholen bei mehreren Ersteller*innen. `<dc:creator xml:lang="es">Biblioteca Nacional de España</dc:creator>` oder als Referenz auf eine Instanz der Agent-Klasse `<dc:creator rdf:resource="http://viaf.org/viaf/147143794/"/>` | Ersteller des Digitalisats; im FIDDK bisher nicht genutzt |
