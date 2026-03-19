@@ -306,10 +306,19 @@ Die kontextuellen Klassen `edm:Agent`, `edm:Place`, `edm:Timespan`, `edm:Event` 
 ### edm:Agent
 In EDM wird `edm:Agent` für "[...] people, either individually or in groups [...]" genutzt. Im FIDDK wird `edm:Agent` nur genutzt, wenn nicht bekannt oder aus den vorliegenden Daten nicht ersichtlich ist, ob es sich um eine Person oder Körperschaft handelt. Für gewöhnlich ist dies aber bekannt, weshalb im FIDDK `edm:Agent` kaum eine Rolle spielt und stattdessen die "genaueren" `foaf:Person` und `foaf:Organization` genutzt werden.
 
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Agent)
+- FIDDK bevorzugt `foaf:Person` und `foaf:Organization`; `edm:Agent` dient nur als Fallback, wenn die Unterscheidung Person/Körperschaft nicht möglich ist.
+- Keine zusätzlichen Agent-spezifischen Properties im Einsatz; Benennungen/Rollen werden in den spezifischen Klassen modelliert.
+
 #### foaf:Person
 Hier auf Basis von `edm:Agent`, im Original EDM gibt es `foaf:Person` in der Form nicht, kann auf diese Weise aber wieder in das Original EDM zurückgeführt werden.
 
 ![Person](images/Person.png)
+
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
+- Namensführung über `skos:prefLabel`/`skos:altLabel`; `foaf:name` wird nicht verwendet.
+- Personenbezogene Eigenschaften sind auf RDAU gemappt (anstatt rdaGr2); `edm:begin`/`edm:end` werden für Personen nicht genutzt.
+- Zusätze im FIDDK: `rdau:P60095` (Affiliation) und `foaf:depiction` für ein Personenbild.
 
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
 |-----------|------------|-------------|---------------------|------------|
@@ -346,6 +355,11 @@ Hier auf Basis von `foaf:Organzation` der Object Templates, im Original EDM gibt
 
 ![Organization](images/Organization.png)
 
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Organization)
+- Namensführung über `skos:prefLabel`/`skos:altLabel`; Gründungs-/Auflösungsdaten via `rdau:P60524`/`rdau:P60525`; `edm:acronym` wird nicht verwendet.
+- Europeana-spezifische Felder (`edm:organizationScope`, `edm:organizationDomain`, `edm:organizationSector`, `edm:geographicLevel`) sind im FIDDK derzeit ungenutzt.
+- Zusätze im FIDDK: `edm:isNextInSequence` (zeitliche Folge) und `foaf:depiction`.
+
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `skos:prefLabel` | literal | min 0, max 1 per lang tag | Die bevorzugte Namensform der Körperschaft. Obwohl die maximale Wiederholung mit 1 angegeben ist, gilt dies als 1 **pro Sprach-Tag**. Mindestens ein `skos:prefLabel` SOLLTE angegeben werden. Mehrere Varianten mit Sprachkennzeichnung werden für unterschiedliche Sprachfassungen oder Übersetzungen dringend empfohlen. `<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` `<skos:prefLabel xml:lang="en">Courtois' eldest nephew</skos:prefLabel>` | bevorzugter Name der Körperschaft; Sprachtag sofern bekannt |
@@ -381,6 +395,11 @@ Ein Ort kann im FIDDK auch ein Theatergebäude sein (im Unterschied zur Institut
 
 ![Place](images/Place.png)
 
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Place)
+- Verwendung nur von `wgs84_pos:lat` und `wgs84_pos:long`; `wgs84_pos:alt` und `wgs84_pos:lat_long` werden nicht genutzt.
+- Benennungen über `skos:prefLabel`/`skos:altLabel`; erläuternde Hinweise über `skos:note`.
+- Nutzung von `edm:isNextInSequence` zur Abbildung historischer Ortsabfolgen.
+
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `wgs84_pos:lat` | floating point | min 0, max 1 | Die geografische Breite eines Ortsobjekts (in Dezimalgrad). Dieses Property wird für diese Klasse empfohlen. `<wgs84_pos:lat>51.5075</wgs84_pos:lat>` | Latitude Koordinate als Floating Point |
@@ -401,6 +420,10 @@ Ein Ort kann im FIDDK auch ein Theatergebäude sein (im Unterschied zur Institut
 ### edm:Timespan
 `edm:Timespan` wird im FIDDK aktuell nicht genutzt, da Informationen über Epochen bei den Datengeber_innen bisher nicht vorliegen. In der GND werden Angaben zu Epochen als Untergruppe von Schlagwort abgebildet ("Historisches Einzelereignis oder Epoche"). Daher werden im FIDDK vorkommende GNDs dieser Kategorie ebenfalls innerhalb von `skos:Concept` abgebildet.
 
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Timespan)
+- `edm:Timespan` wird im FIDDK nicht eingesetzt; Epochen/Perioden werden als `skos:Concept` modelliert.
+- Zeitangaben werden als ISO‑8601‑Subset (Solr‑Format) in Literalen geführt; Unsicherheiten via `rdfs:label` (siehe „Datumsformatierung“/„Modellierung von Unsicherheit“).
+
 ~~Properties~~ | ~~Value type~~ | ~~Cardinality~~ | EDM Note (Deutsch)
 --------------|----------------|----------------|--------------------
 `~~skos:prefLabel~~` | ~~literal~~ | ~~min 0, max 1 per lang tag~~ | Die bevorzugte Benennungsform einer Zeitspanne oder Epoche. Obwohl die maximale Wiederholung mit 1 angegeben ist, wird dies als 1 **pro Sprach-Tag** verstanden. Mindestens ein `skos:prefLabel` SOLLTE angegeben werden; mehrere Varianten mit Sprachkennzeichnung werden für Übersetzungen und Sprachvarianten empfohlen. `<skos:prefLabel xml:lang="en">Roman Empire</skos:prefLabel>`
@@ -420,6 +443,11 @@ Ein Ort kann im FIDDK auch ein Theatergebäude sein (im Unterschied zur Institut
 Der FIDDK stützt sich bei Konzepten vor allem auf Sachbegriffe der GND und deren Relationen. Konzepte im FIDDK können auch Epochenangaben sein.
 
 ![Concept](images/Concept.png)
+
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Concept)
+- `skos:Concept` deckt im FIDDK auch Epochen/Perioden ab (anstelle von `edm:Timespan`).
+- SKOS-Match-Properties (`skos:broadMatch`, `skos:narrowMatch`, `skos:relatedMatch`, `skos:exactMatch`, `skos:closeMatch`) und `skos:inScheme` werden nicht verwendet.
+- `skos:notation` wird derzeit nicht genutzt.
 
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FIDDK Note |
 |-----------|------------|-------------|---------------------|------------|
@@ -442,6 +470,12 @@ Der FIDDK stützt sich bei Konzepten vor allem auf Sachbegriffe der GND und dere
 Events basieren entweder auf der GND (Konferenz oder Ereignis bzw. Konferenz-/Ereignisfolge) oder auf strukturierten oder Freitextangaben der Datengeber_innen.
 
 ![Event](images/Event.png)
+
+Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Event)
+- `edm:happenedAt` und `edm:occurredAt` dürfen im FIDDK auch Literale sein (Range gelockert); EDM erwartet Referenzen (`Place`/`TimeSpan`).
+- `dcterms:hasPart` und `dcterms:isPartOf` können Referenzen oder Literale sein.
+- `edm:hasType` wird mit GND‑Sachbegriffen belegt; kontrolliertes Vokabular im Aufbau.
+- Erweiterungen: RDAU‑Rollen analog zu `edm:ProvidedCHO`, zusätzlich `foaf:depiction` und `foaf:homepage`.
 
 Properties | Value type | Cardinality | EDM Note | FIDDK Note
 ------------|------------|------------|------------|------------
