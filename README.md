@@ -11,10 +11,10 @@ Allgemeine Projektbeschreibung (de): http://www.ub.uni-frankfurt.de/projekte/the
 
 ## Inhalte
 
-- `src/fiddk_validater/validator.py` – Kernfunktionen `validate` und `validate_to_files` (ruft pySHACL auf, lädt RDF/Shapes, serialisiert Reports).
-- `src/fiddk_validater/cli.py`, `src/fiddk_validater/__main__.py` – Kommandozeilen-Interface (`python -m fiddk_validater`).
-- `src/fiddk_validater/luigi_tasks.py` – Luigi-Task `ValidateRDFTask` für Workflow/Batch.
-- `src/fiddk_validater/shapes/*.ttl` – SHACL-Shapes für `Aggregation`, `ProvidedCHO`, `WebResource`, `Person`, `Organization`, `Place`, `TimeSpan`, `Concept`, `Event`.
+- `src/fiddk_validator/validator.py` – Kernfunktionen `validate` und `validate_to_files` (ruft pySHACL auf, lädt RDF/Shapes, serialisiert Reports).
+- `src/fiddk_validator/cli.py`, `src/fiddk_validator/__main__.py` – Kommandozeilen-Interface (`python -m fiddk_validator`).
+- `src/fiddk_validator/luigi_tasks.py` – Luigi-Task `ValidateRDFTask` für Workflow/Batch.
+- `src/fiddk_validator/shapes/*.ttl` – SHACL-Shapes für `Aggregation`, `ProvidedCHO`, `WebResource`, `Person`, `Organization`, `Place`, `TimeSpan`, `Concept`, `Event`.
 - `documentation/DataModel_FIDDK_de.md` – Ausführliche Modellbeschreibung inkl. FIDDK‑Abweichungen/Erweiterungen.
 
 ## Voraussetzungen
@@ -35,12 +35,12 @@ pip install -e .
 
 - Mit mitgelieferten Shapes:
 ```bash
-python -m fiddk_validater -d pfad/zur/daten.ttl -r build/shacl-report.ttl --inference rdfs
+python -m fiddk_validator -d pfad/zur/daten.ttl -r build/shacl-report.ttl --inference rdfs
 ```
 
 - Mit eigenem Shapes‑Verzeichnis:
 ```bash
-python -m fiddk_validater -d daten.ttl -s src/fiddk_validater/shapes -r build/report.ttl --report-format turtle
+python -m fiddk_validator -d daten.ttl -s src/fiddk_validator/shapes -r build/report.ttl --report-format turtle
 ```
 
 - Wichtige Optionen:
@@ -57,7 +57,7 @@ python -m fiddk_validater -d daten.ttl -s src/fiddk_validater/shapes -r build/re
 
 - Beispielaufruf:
 ```bash
-python -m luigi --module fiddk_validater.luigi_tasks ValidateRDFTask --data-path daten.ttl --report-path build/report.ttl --shacl-path src/fiddk_validater/shapes --inference rdfs --write-text-report True --fail-on-violation True
+python -m luigi --module fiddk_validator.luigi_tasks ValidateRDFTask --data-path daten.ttl --report-path build/report.ttl --shacl-path src/fiddk_validator/shapes --inference rdfs --write-text-report True --fail-on-violation True
 ```
 
 - Parameter (Auszug): `data_path`, `shacl_path` (optional), `report_path`, `data_format`/`shacl_format`/`report_format` (optional), `inference` (`rdfs`), `advanced`/`debug` (False), `write_text_report` (True), `fail_on_violation` (False/True).

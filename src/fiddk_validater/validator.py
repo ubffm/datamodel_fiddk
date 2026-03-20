@@ -33,7 +33,7 @@ def validate(
 
   shacl_graph = Graph()
   if shacl_path is None:
-    shapes_dir = resources.files("fiddk_validater").joinpath("shapes")
+    shapes_dir = resources.files("fiddk_validator").joinpath("shapes")
     loaded = False
     if shapes_dir.is_dir():
       for entry in shapes_dir.iterdir():
@@ -41,7 +41,7 @@ def validate(
           shacl_graph.parse(data=entry.read_text(encoding="utf-8"), format="turtle")
           loaded = True
     else:
-      entry = resources.files("fiddk_validater").joinpath("shapes").joinpath("fiddk.ttl")
+      entry = resources.files("fiddk_validator").joinpath("shapes").joinpath("fiddk.ttl")
       if entry.is_file():
         shacl_graph.parse(data=entry.read_text(encoding="utf-8"), format="turtle")
         loaded = True
