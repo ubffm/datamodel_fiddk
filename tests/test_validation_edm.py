@@ -12,17 +12,17 @@ from fiddk_validator.validator import validate  # noqa: E402
 
 def test_valid_minimal_conforms():
     data_path = ROOT / "tests" / "data" / "edm" / "valid" / "minimal.ttl"
-    conforms, _, report = validate(data_path=data_path, inference="rdfs", debug=True)
+    conforms, _, report = validate(data_path=data_path, inference="rdfs", debug=False)
     assert conforms is True, f"SHACL-Report:\n{report}"
 
 
 def test_valid_rich_conforms():
     data_path = ROOT / "tests" / "data" / "edm" / "valid" / "rich.ttl"
-    conforms, _, report = validate(data_path=data_path, inference="rdfs", debug=True)
+    conforms, _, report = validate(data_path=data_path, inference="rdfs", debug=False)
     assert conforms is True, f"SHACL-Report:\n{report}"
 
 
 def test_invalid_missing_required_not_conform():
     data_path = ROOT / "tests" / "data" / "edm" / "invalid" / "missing_required.ttl"
-    conforms, _, report = validate(data_path=data_path, inference="rdfs", debug=True)
+    conforms, _, report = validate(data_path=data_path, inference="rdfs", debug=False)
     assert conforms is False, f"Erwartet: nicht konform. SHACL-Report:\n{report}"

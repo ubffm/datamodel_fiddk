@@ -27,14 +27,22 @@ fiddk-sh:PlaceShape
         sh:path wgs84_pos:lat ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
-        sh:datatype xsd:float ;
+        sh:or (
+          [ sh:datatype xsd:decimal ]
+          [ sh:datatype xsd:float ]
+          [ sh:datatype xsd:double ]
+        );
     ] ;
 
     sh:property [
         sh:path wgs84_pos:long ;
         sh:minCount 0 ;
         sh:maxCount 1 ;
-        sh:datatype xsd:float ;
+        sh:or (
+          [ sh:datatype xsd:decimal ]
+          [ sh:datatype xsd:float ]
+          [ sh:datatype xsd:double ]
+        );
     ] ;
 
     sh:property [

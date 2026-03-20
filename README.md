@@ -83,7 +83,7 @@ python -m luigi --module fiddk_validator.luigi_tasks ValidateRDFTask --data-path
 
 ## Mitwirkung & Tests
 
-- Änderungen an Shapes in `src/fiddk_validater/shapes/` vornehmen und mit der CLI/Validator‑API testen.
+- Änderungen an Shapes in `src/fiddk_validator/shapes/` vornehmen und mit der CLI/Validator‑API testen.
 - Für automatisierte Validierung in Workflows eignet sich der Luigi‑Task.
 - Pull Requests sind willkommen.
 

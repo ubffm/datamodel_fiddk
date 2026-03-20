@@ -1,5 +1,5 @@
 # Diese Datei wurde aufgeteilt in:
-# - src/fiddk_validater/shapes/ProvidedCHO.descriptive.ttl
-# - src/fiddk_validater/shapes/ProvidedCHO.relations.ttl
-# - src/fiddk_validater/shapes/ProvidedCHO.roles.ttl
+# - src/fiddk_validator/shapes/ProvidedCHO.descriptive.ttl
+# - src/fiddk_validator/shapes/ProvidedCHO.relations.ttl
+# - src/fiddk_validator/shapes/ProvidedCHO.roles.ttl
 # Sie ist absichtlich leer. Bitte bearbeite die genannten Dateien.
