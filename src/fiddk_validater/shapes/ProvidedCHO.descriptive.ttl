@@ -1,0 +1,248 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> . 
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edm:     <http://www.europeana.eu/schemas/edm/> .
+@prefix ore:     <http://www.openarchives.org/ore/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdau:    <http://www.rdaregistry.info/Elements/u/> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix bf:      <http://id.loc.gov/ontologies/bibframe/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+@prefix fiddk-sh: <https://performing-arts.eu/shapes/fiddk/> .
+
+#################################################################
+# edm:ProvidedCHO – Descriptive
+#################################################################
+
+fiddk-sh:ProvidedCHOShape
+    a sh:NodeShape ;
+    sh:targetClass edm:ProvidedCHO ;
+
+    # dc:contributor (0..*)
+    sh:property [
+        sh:path dc:contributor ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:coverage (0..*)
+    sh:property [
+        sh:path dc:coverage ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:creator (0..*)
+    sh:property [
+        sh:path dc:creator ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Mindestens eins von dc:title | dc:description ist Pflicht
+    sh:or (
+      [ sh:property [ sh:path dc:title ;       sh:minCount 1 ] ]
+      [ sh:property [ sh:path dc:description ; sh:minCount 1 ] ]
+    ) ;
+
+    # dc:description (0..*) – Beschreibung ODER Titel muss vorhanden sein
+    sh:property [
+        sh:path dc:description ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:identifier (0..*)
+    sh:property [
+        sh:path dc:identifier ;
+        sh:minCount 0 ;
+        sh:datatype xsd:string ;
+    ] ;
+
+    # dc:language (0..*)
+    sh:property [
+        sh:path dc:language ;
+        sh:minCount 0 ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    # dc:publisher (0..*)
+    sh:property [
+        sh:path dc:publisher ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:rights (0..*)
+    sh:property [
+        sh:path dc:rights ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:source (0..*)
+    sh:property [
+        sh:path dc:source ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Mindestens eins von dc:subject | dc:type | dcterms:spatial | dcterms:temporal ist Pflicht
+    sh:or (
+      [ sh:property [ sh:path dc:subject ;       sh:minCount 1 ] ]
+      [ sh:property [ sh:path dc:type ;          sh:minCount 1 ] ]
+      [ sh:property [ sh:path dcterms:spatial ;  sh:minCount 1 ] ]
+      [ sh:property [ sh:path dcterms:temporal ; sh:minCount 1 ] ]
+    ) ;
+
+    # dc:subject (0..*)
+    sh:property [
+        sh:path dc:subject ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:title (0..1)
+    sh:property [
+        sh:path dc:title ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:Literal ;
+    ] ;
+
+    # dc:type (0..*)
+    sh:property [
+        sh:path dc:type ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:alternative (0..*)
+    sh:property [
+        sh:path dcterms:alternative ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:created (0..*)
+    sh:property [
+        sh:path dcterms:created ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:extent (0..*)
+    sh:property [
+        sh:path dcterms:extent ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:issued (0..*)
+    sh:property [
+        sh:path dcterms:issued ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:medium (0..*)
+    sh:property [
+        sh:path dcterms:medium ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:provenance (0..*)
+    sh:property [
+        sh:path dcterms:provenance ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:tableOfContents (0..*)
+    sh:property [
+        sh:path dcterms:tableOfContents ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:spatial (0..*)
+    sh:property [
+        sh:path dcterms:spatial ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dcterms:temporal (0..*)
+    sh:property [
+        sh:path dcterms:temporal ;
+        sh:minCount 0 ;
+    ] ;
+
+    # edm:type (1..1) mit kontrollierter Werteliste
+    sh:property [
+        sh:path edm:type ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ( "TEXT" "IMAGE" "SOUND" "VIDEO" "3D" ) ;
+    ] ;
+
+    #################################################################
+    # Ergänzungen gemäß FIDDK Datenmodell – Identifikatoren & Zusatzfelder
+    #################################################################
+
+    # bibo:isbn (0..1) – grobe Formatprüfung
+    sh:property [
+        sh:path bibo:isbn ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:string ;
+        sh:pattern "^(?:97[89][ -]?)?(?:\\d[ -]?){9}[\\dX]$" ;
+        sh:flags "i" ;
+    ] ;
+
+    # bibo:issn (0..1) – Format ####-###X
+    sh:property [
+        sh:path bibo:issn ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:Literal ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d{4}-\\d{3}[\\dX]$" ;
+        sh:flags "i" ;
+    ] ;
+
+    # bf:partNumber (0..1)
+    sh:property [
+        sh:path bf:partNumber ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # bf:shelfMark (0..1)
+    sh:property [
+        sh:path bf:shelfMark ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+
+    # bf:subtitle (0..*)
+    sh:property [
+        sh:path bf:subtitle ;
+        sh:minCount 0 ;
+    ] ;
+
+    # dc:format (0..*)
+    sh:property [
+        sh:path dc:format ;
+        sh:minCount 0 ;
+    ] ;
+
+    #################################################################
+    # Regel: Wenn edm:type = "TEXT", dann muss mind. eine dc:language vorhanden sein
+    #################################################################
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Für Objekte mit edm:type = \"TEXT\" muss mindestens eine dc:language angegeben sein."@de ;
+        sh:select """
+          PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+          PREFIX edm:  <http://www.europeana.eu/schemas/edm/>
+
+          SELECT $this
+          WHERE {
+            $this edm:type ?t .
+            FILTER(STR(?t) = "TEXT")
+            FILTER NOT EXISTS { $this dc:language ?lang }
+          }
+        """
+    ] .

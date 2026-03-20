@@ -1,0 +1,375 @@
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> . 
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edm:     <http://www.europeana.eu/schemas/edm/> .
+@prefix ore:     <http://www.openarchives.org/ore/terms/> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdau:    <http://www.rdaregistry.info/Elements/u/> .
+@prefix bibo:    <http://purl.org/ontology/bibo/> .
+@prefix bf:      <http://id.loc.gov/ontologies/bibframe/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+@prefix fiddk-sh: <https://performing-arts.eu/shapes/fiddk/> .
+
+#################################################################
+# edm:ProvidedCHO – RDAU Roles
+#################################################################
+
+fiddk-sh:ProvidedCHOShape
+    # Produktionsfirma
+    sh:property [
+        sh:path rdau:P60062 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Sammler_in
+    sh:property [
+        sh:path rdau:P60066 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Aufnahmedatum (Timespan oder Literal)
+    sh:property [
+        sh:path rdau:P60074 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Spender/Geber
+    sh:property [
+        sh:path rdau:P60091 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Dirigent_in
+    sh:property [
+        sh:path rdau:P60141 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Schauspieler_in
+    sh:property [
+        sh:path rdau:P60142 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Tänzer_in
+    sh:property [
+        sh:path rdau:P60144 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Moderator_in
+    sh:property [
+        sh:path rdau:P60147 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Puppenspieler_in
+    sh:property [
+        sh:path rdau:P60148 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Instrumentalist_in / Musiker_in
+    sh:property [
+        sh:path rdau:P60150 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Kommentator_in
+    sh:property [
+        sh:path rdau:P60151 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Erzähler (narrator)
+    sh:property [
+        sh:path rdau:P60153 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Erzähler (storyteller)
+    sh:property [
+        sh:path rdau:P60154 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Sprecher_in / Vortragende_r
+    sh:property [
+        sh:path rdau:P60155 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Sänger_in
+    sh:property [
+        sh:path rdau:P60156 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Herstellungsort
+    sh:property [
+        sh:path rdau:P60162 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Erscheinungsort
+    sh:property [
+        sh:path rdau:P60163 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Musikarrangeur
+    sh:property [
+        sh:path rdau:P60379 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Zeichner / Entwurfsverfasser
+    sh:property [
+        sh:path rdau:P60381 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Musikalische Leitung
+    sh:property [
+        sh:path rdau:P60383 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Kostümdesigner_in
+    sh:property [
+        sh:path rdau:P60384 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Übersetzer_in
+    sh:property [
+        sh:path rdau:P60385 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Performer_in
+    sh:property [
+        sh:path rdau:P60387 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Herausgeber_in
+    sh:property [
+        sh:path rdau:P60393 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Bild-Beitragende (Illustrator_in)
+    sh:property [
+        sh:path rdau:P60396 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Aufnahmeleitende / Recordist
+    sh:property [
+        sh:path rdau:P60397 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Theaterregisseur_in
+    sh:property [
+        sh:path rdau:P60399 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Geehrte / Preisträger_in
+    sh:property [
+        sh:path rdau:P60406 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Stecher_in
+    sh:property [
+        sh:path rdau:P60410 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Druckgrafiker_in
+    sh:property [
+        sh:path rdau:P60412 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Lithograf_in
+    sh:property [
+        sh:path rdau:P60414 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Radierer_in
+    sh:property [
+        sh:path rdau:P60416 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Drucker_in
+    sh:property [
+        sh:path rdau:P60418 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Designer_in
+    sh:property [
+        sh:path rdau:P60424 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Komponist_in
+    sh:property [
+        sh:path rdau:P60426 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Fotograf_in
+    sh:property [
+        sh:path rdau:P60429 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Interviewer_in
+    sh:property [
+        sh:path rdau:P60430 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Künstler_in (grafisch/zeichnerisch/malerisch)
+    sh:property [
+        sh:path rdau:P60431 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Interviewte Person
+    sh:property [
+        sh:path rdau:P60432 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Choreograf_in
+    sh:property [
+        sh:path rdau:P60433 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Autor_in
+    sh:property [
+        sh:path rdau:P60434 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Architekt_in
+    sh:property [
+        sh:path rdau:P60435 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Produzent_in
+    sh:property [
+        sh:path rdau:P60441 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Hersteller_in
+    sh:property [
+        sh:path rdau:P60443 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Adressat_in / Rezipient_in
+    sh:property [
+        sh:path rdau:P60456 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Bildhauer_in / Skulpteur_in
+    sh:property [
+        sh:path rdau:P60475 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Drehbuchautor_in
+    sh:property [
+        sh:path rdau:P60476 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Liedtexter_in
+    sh:property [
+        sh:path rdau:P60477 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Librettist_in
+    sh:property [
+        sh:path rdau:P60478 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Sounddesigner_in / Tondesigner_in
+    sh:property [
+        sh:path rdau:P60811 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Lichtdesigner_in
+    sh:property [
+        sh:path rdau:P60813 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Maskenbildner_in
+    sh:property [
+        sh:path rdau:P60840 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Chorleiter_in
+    sh:property [
+        sh:path rdau:P60842 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Organisator_in
+    sh:property [
+        sh:path rdau:P60849 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Assistent_in
+    sh:property [
+        sh:path rdau:P60857 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Lehrende Person
+    sh:property [
+        sh:path rdau:P60863 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Casting Director
+    sh:property [
+        sh:path rdau:P60890 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Bearbeiter_in (Revisor)
+    sh:property [
+        sh:path rdau:P61082 ;
+        sh:minCount 0 ;
+    ] ;
+
+    # Texteditor_in (Redakteur_in)
+    sh:property [
+        sh:path rdau:P61085 ;
+        sh:minCount 0 ;
+    ] .
