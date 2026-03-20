@@ -1,7 +1,8 @@
 import argparse
 import sys
+from pathlib import Path
 
-from .validator import validate_to_files
+from .validator import _resolve_format, validate
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -29,18 +30,36 @@ def main(argv: list[str] | None = None) -> None:
 
   args = parser.parse_args(argv)
 
-  conforms = validate_to_files(
+  # Validierung ausführen, damit wir bei Bedarf den Text-Report direkt ausgeben können.
+  conforms, results_graph, results_text = validate(
     data_path=args.data,
     shacl_path=args.shapes,
-    report_path=args.report,
     data_format=args.data_format,
     shacl_format=args.shapes_format,
-    report_format=args.report_format,
     inference=args.inference,
     advanced=False,
     debug=False,
-    write_text_report=not args.no_text,
   )
 
-  print(f"Konform: {'ja' if conforms else 'nein'}")
+  # Report-Dateien schreiben (RDF und optional Text)
+  report_path = Path(args.report)
+  report_path.parent.mkdir(parents=True, exist_ok=True)
+  rfmt = args.report_format or _resolve_format(report_path, None) or "turtle"
+  serialized = results_graph.serialize(format=rfmt)
+  if isinstance(serialized, bytes):
+    serialized = serialized.decode("utf-8")
+  report_path.write_text(serialized, encoding="utf-8")
+  if not args.no_text:
+    report_path.with_suffix(".txt").write_text(results_text, encoding="utf-8")
+
+  if conforms:
+    print("Konform: ja")
+  else:
+    print("Konform: nein")
+    print(f"Report (RDF): {report_path}")
+    if not args.no_text:
+      print(f"Report (Text): {report_path.with_suffix('.txt')}")
+    print("\nSHACL-Report (Kurzfassung):")
+    print(results_text)
+
   sys.exit(0 if conforms else 2)
