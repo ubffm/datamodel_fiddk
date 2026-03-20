@@ -16,7 +16,12 @@ def main(argv: list[str] | None = None) -> None:
     default=None,
     help="Pfad zur SHACL-Shape-Datei (Standard: eingepackte Shapes)",
   )
-  parser.add_argument("-r", "--report", default="shacl-report.ttl", help="Pfad zum Report (RDF)")
+  parser.add_argument(
+    "-r",
+    "--report",
+    default=None,
+    help="Pfad zum Report (RDF); wenn gesetzt, erfolgt keine Ausgabe auf stdout",
+  )
   parser.add_argument("--data-format", help="Format der Daten (z. B. turtle, xml, json-ld)")
   parser.add_argument("--shapes-format", help="Format der Shapes")
   parser.add_argument("--report-format", help="Format des Reports (Standard: aus Endung)")
@@ -41,25 +46,23 @@ def main(argv: list[str] | None = None) -> None:
     debug=False,
   )
 
-  # Report-Dateien schreiben (RDF und optional Text)
-  report_path = Path(args.report)
-  report_path.parent.mkdir(parents=True, exist_ok=True)
-  rfmt = args.report_format or _resolve_format(report_path, None) or "turtle"
-  serialized = results_graph.serialize(format=rfmt)
-  if isinstance(serialized, bytes):
-    serialized = serialized.decode("utf-8")
-  report_path.write_text(serialized, encoding="utf-8")
-  if not args.no_text:
-    report_path.with_suffix(".txt").write_text(results_text, encoding="utf-8")
-
-  if conforms:
-    print("Konform: ja")
-  else:
-    print("Konform: nein")
-    print(f"Report (RDF): {report_path}")
+  # Report schreiben nur, wenn -r/--report angegeben ist; dann keine Ausgabe auf stdout
+  if args.report:
+    report_path = Path(args.report)
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    rfmt = args.report_format or _resolve_format(report_path, None) or "turtle"
+    serialized = results_graph.serialize(format=rfmt)
+    if isinstance(serialized, bytes):
+      serialized = serialized.decode("utf-8")
+    report_path.write_text(serialized, encoding="utf-8")
     if not args.no_text:
-      print(f"Report (Text): {report_path.with_suffix('.txt')}")
-    print("\nSHACL-Report (Kurzfassung):")
-    print(results_text)
+      report_path.with_suffix(".txt").write_text(results_text, encoding="utf-8")
+  else:
+    if conforms:
+      print("Konform: ja")
+    else:
+      print("Konform: nein")
+      print("\nSHACL-Report (Kurzfassung):")
+      print(results_text)
 
   sys.exit(0 if conforms else 2)
