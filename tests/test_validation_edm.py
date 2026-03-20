@@ -7,10 +7,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-try:
-    from fiddk_validator.validator import validate  # noqa: E402
-except ModuleNotFoundError:  # noqa: E402
-    from fiddk_validater.validator import validate  # noqa: E402
+from fiddk_validator.validator import validate  # noqa: E402
 
 
 def test_valid_minimal_conforms():
