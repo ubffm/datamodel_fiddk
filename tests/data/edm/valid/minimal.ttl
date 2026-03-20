@@ -1,0 +1,28 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edm: <https://www.europeana.eu/schemas/edm/> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://performing-arts.eu/Record/TST_0001>
+  a edm:ProvidedCHO ;
+  dc:title "Beispielobjekt"@de ;
+  edm:type "IMAGE" ;
+  dc:identifier "TST_0001" .
+
+<http://performing-arts.eu/WebResource/TST_0001_1>
+  a edm:WebResource ;
+  dc:format "image/jpeg" ;
+  dcterms:created "2020-06-21T00:00:00Z"^^xsd:dateTime ;
+  dc:description "Digitale Ansicht"@de .
+
+<http://performing-arts.eu/aggregation/TST_0001>
+  a ore:Aggregation ;
+  edm:aggregatedCHO <http://performing-arts.eu/Record/TST_0001> ;
+  edm:isShownBy <http://performing-arts.eu/WebResource/TST_0001_1> ;
+  edm:dataProvider "Beispiel-Archiv"@de ;
+  edm:provider "FID Darstellende Kunst"@de ;
+  edm:rights <http://rightsstatements.org/vocab/InC/1.0/> .

@@ -1,0 +1,79 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edm: <https://www.europeana.eu/schemas/edm/> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://performing-arts.eu/Record/TST_0002>
+  a edm:ProvidedCHO ;
+  dc:title "Fotografie: Ensembleprobe"@de ;
+  dc:description "Gelatinesilberabzug"@de ;
+  edm:type "IMAGE" ;
+  bibo:isbn "9783895001234" ;
+  dc:subject <http://performing-arts.eu/concept/gnd_4051166-0> ;
+  dcterms:issued <http://performing-arts.eu/time/TST_0002_issued> ;
+  dcterms:spatial <http://performing-arts.eu/place/gnd_4023118-5> ;
+  rdau:P60429 <http://performing-arts.eu/agent/gnd_1234567> ;
+  rdau:P60399 <http://performing-arts.eu/agent/TST_dir_0001> ;
+  edm:wasPresentAt <http://performing-arts.eu/event/TST_ev_0001> .
+
+<http://performing-arts.eu/time/TST_0002_issued>
+  a edm:TimeSpan ;
+  skos:prefLabel "ca. 1930"@de ;
+  edm:begin "1930-01-01T00:00:00Z"^^xsd:dateTime ;
+  edm:end "1930-12-31T23:59:59Z"^^xsd:dateTime .
+
+<http://performing-arts.eu/place/gnd_4023118-5>
+  a edm:Place ;
+  skos:prefLabel "Hamburg"@de ;
+  wgs84_pos:lat 53.5511 ;
+  wgs84_pos:long 9.9937 ;
+  owl:sameAs <http://d-nb.info/gnd/4023118-5> .
+
+<http://performing-arts.eu/concept/gnd_4051166-0>
+  a skos:Concept ;
+  skos:prefLabel "Theaterfotografie"@de ;
+  owl:sameAs <http://d-nb.info/gnd/4051166-0> .
+
+<http://performing-arts.eu/agent/gnd_1234567>
+  a foaf:Person ;
+  skos:prefLabel "Max Beispiel"@de ;
+  owl:sameAs <http://d-nb.info/gnd/1234567> .
+
+<http://performing-arts.eu/agent/TST_dir_0001>
+  a foaf:Person ;
+  skos:prefLabel "Erika Regie"@de .
+
+<http://performing-arts.eu/agent/TST_or_0001>
+  a foaf:Organization ;
+  skos:prefLabel "Theatermuseum Beispielstadt"@de ;
+  foaf:homepage <https://www.beispieltheatermuseum.de/> .
+
+<http://performing-arts.eu/event/TST_ev_0001>
+  a edm:Event ;
+  skos:prefLabel "Premierenfeier ‚Die Probe‘"@de ;
+  edm:happenedAt <http://performing-arts.eu/place/gnd_4023118-5> ;
+  edm:occurredAt <http://performing-arts.eu/time/TST_0002_issued> .
+
+<http://images.example.org/TST_0002.jpg>
+  a edm:WebResource ;
+  dc:format "image/jpeg" ;
+  dc:description "Digitale Reproduktion (Vorderseite)"@de ;
+  dcterms:isReferencedBy <https://iiif.example.org/presentation/TST_0002/manifest> .
+
+<http://performing-arts.eu/aggregation/TST_0002>
+  a ore:Aggregation ;
+  edm:aggregatedCHO <http://performing-arts.eu/Record/TST_0002> ;
+  edm:isShownBy <http://images.example.org/TST_0002.jpg> ;
+  edm:object <http://images.example.org/TST_0002.jpg> ;
+  edm:dataProvider <http://performing-arts.eu/agent/TST_or_0001> ;
+  edm:provider "FID Darstellende Kunst"@de ;
+  dc:rights "Copyright © Theatermuseum Beispielstadt"@de ;
+  edm:rights <http://rightsstatements.org/vocab/NoC-OKLR/1.0/> .

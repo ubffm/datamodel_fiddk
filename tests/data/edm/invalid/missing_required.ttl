@@ -1,0 +1,13 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix edm: <https://www.europeana.eu/schemas/edm/> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://performing-arts.eu/Record/TST_9999>
+  a edm:ProvidedCHO ;
+  dc:title "Ungültiger Datensatz ohne edm:type"@de .
+
+<http://performing-arts.eu/aggregation/TST_9999>
+  a ore:Aggregation ;
+  edm:aggregatedCHO <http://performing-arts.eu/Record/TST_9999> ;
+  edm:isShownAt <https://catalog.example.org/records/TST_9999> .
