@@ -86,3 +86,12 @@ python -m luigi --module fiddk_validater.luigi_tasks ValidateRDFTask --data-path
 - Änderungen an Shapes in `src/fiddk_validater/shapes/` vornehmen und mit der CLI/Validator‑API testen.
 - Für automatisierte Validierung in Workflows eignet sich der Luigi‑Task.
 - Pull Requests sind willkommen.
+
+### Tests ausführen
+
+- Dev‑Abhängigkeiten inkl. pytest installieren:
+  - `pip install -e ".[dev]"`
+- Tests starten:
+  - `pytest -q`
+- Einzelnen Test ausführen:
+  - `pytest -q tests/test_validation_edm.py::test_valid_minimal_conforms`
