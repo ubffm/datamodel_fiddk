@@ -14,7 +14,6 @@ dependencies = [
   "rdflib>=6.2",
   "pyshacl>=0.24",
   "luigi>=3.4",
-  "ruff>=0.4.0",
 ]
 
 [project.optional-dependencies]
