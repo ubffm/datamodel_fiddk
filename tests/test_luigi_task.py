@@ -27,18 +27,16 @@ def test_validate_rdf_task_valid_dataset_creates_reports_and_succeeds(tmp_path: 
     success = luigi.build([task], workers=1, local_scheduler=True)
 
     # Assert: Erfolgreiche Ausführung und erzeugte Reports
-    assert success is True, (
-        "Luigi-Task sollte erfolgreich sein (konforme Daten)."
+    assert success is True, "Luigi-Task sollte erfolgreich sein (konforme Daten)."
+    assert report_path.exists() and report_path.stat().st_size > 0, (
+        "RDF-Report wurde nicht erstellt."
     )
-    assert (
-        report_path.exists() and report_path.stat().st_size > 0
-    ), "RDF-Report wurde nicht erstellt."
 
     # Text-Report: Implementierungen verwenden entweder <basename>.txt
     # oder <basename>.<rdf-suffix>.txt
     txt_candidate1 = report_path.with_suffix(".txt")  # z. B. report.txt
     # z. B. report.ttl.txt
     txt_candidate2 = Path(f"{report_path}.txt")
-    assert (
-        txt_candidate1.exists() or txt_candidate2.exists()
-    ), "Text-Report (.txt) wurde nicht erstellt."
+    assert txt_candidate1.exists() or txt_candidate2.exists(), (
+        "Text-Report (.txt) wurde nicht erstellt."
+    )
