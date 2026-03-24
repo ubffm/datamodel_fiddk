@@ -41,3 +41,8 @@ known-first-party = ["fiddk_validator"]
 environments = [
   "sys_platform == 'linux'",
 ]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+  "ignore:.*utcfromtimestamp\\(\\) is deprecated.*:DeprecationWarning:luigi\\.parameter",
+]
