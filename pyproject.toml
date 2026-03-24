@@ -13,7 +13,7 @@ authors = [{ name = "Jan Smendek" }]
 dependencies = [
   "rdflib>=6.2",
   "pyshacl>=0.24",
-  "luigi>=3.4",
+  "luigi>=3.8",
 ]
 
 [project.optional-dependencies]
@@ -36,3 +36,8 @@ ignore = ["E203"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["fiddk_validator"]
+
+[tool.uv]
+environments = [
+  "sys_platform == 'linux'",
+]
