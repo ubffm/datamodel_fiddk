@@ -140,18 +140,6 @@ fiddk-sh:ProvidedCHOShape
         sh:minCount 0 ;
     ] ;
 
-    # Musikalische Supervision
-    sh:property [
-        sh:path rdau:P60383 ;
-        sh:minCount 0 ;
-    ] ;
-
-    # Kostümdesigner_in
-    sh:property [
-        sh:path rdau:P60384 ;
-        sh:minCount 0 ;
-    ] ;
-
     # Kostümgestaltung
     sh:property [
         sh:path rdau:P60384 ;
