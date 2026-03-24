@@ -192,13 +192,16 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | `rdau:P60379` | literal or reference to Agent | min 0, max unbounded | „hat Musikarrangeur“ – Person, die eine Komposition für ein anderes Medium arrangiert. | Musikarrangement durch, Arrangeur_in |
 | `rdau:P60381` | literal or reference to Agent | min 0, max unbounded | „hat Zeichner/Entwurfsverfasser“ – Architekt, Erfinder etc., der detaillierte Pläne/Zeichnungen erstellt. | Entwurf, Designer_in des Entwurfs |
 | `rdau:P60383` | literal or reference to Agent | min 0, max unbounded | „hat musikalische Leitung“ – Koordiniert Tätigkeiten von Komponisten, Toneditoren, Tonmischern in Produktionen. | Musikalische Leitung; nicht Dirigent_in (siehe `rdau:P60141`) |
+| `rdau:P60611` | literal or reference to Agent | min 0, max unbounded | „hat musikalische Supervision“ – Beaufsichtigt musikalische Aspekte einer Produktion; ggf. organisatorische/kuratorische Verantwortung. | Musikalische Supervision |
 | `rdau:P60384` | literal or reference to Agent | min 0, max unbounded | „hat Kostümdesigner“ – Person, die Kostüme für Inszenierungen entwirft. | Kostümbildner_in |
+| `rdau:P60612` | literal or reference to Agent | min 0, max unbounded | „hat Kostümgestaltung“ – Verantwortlich für die Gestaltung/Ausführung von Kostümen. | Kostümgestaltung |
 | `rdau:P60385` | literal or reference to Agent | min 0, max unbounded | „hat Übersetzer“ – Person, die sprachliche Inhalte einer Ressource in eine andere Sprache überträgt. | Übersetzer_in |
 | `rdau:P60387` | literal or reference to Agent | min 0, max unbounded | „hat Performer“ – Person, die Musik, Schauspiel, Tanz, Sprache usw. performt. | Performer_in |
 | `rdau:P60393` | literal or reference to Agent | min 0, max unbounded | „hat Herausgeber“ – Person, die Inhalte überarbeitet, zusammenstellt oder klärt. | Herausgeber_in (Achtung: siehe `rdau:P61085`) |
 | `rdau:P60396` | literal or reference to Agent | min 0, max unbounded | „hat Bild-Beitragende“ – ergänzt Inhalte durch Zeichnungen, Fotos, Diagramme usw. | Illustrator_in |
 | `rdau:P60397` | literal or reference to Agent | min 0, max unbounded | „hat Aufnahmeleitende/Recordist“ – Person, die Ton/Video aufnimmt, inkl. Feldaufnahmen. | Kameramann_frau / Aufnahme / Tonmann_frau |
 | `rdau:P60399` | literal or reference to Agent | min 0, max unbounded | „hat Theaterregisseur“ – Verantwortlich für die Leitung einer Bühnenproduktion. | Theaterregisseur_in (für Film: `rdau:P60084`) |
+| `rdau:P60673` | literal or reference to Agent | min 0, max unbounded | „hat Regisseur/Director“ – Verantwortlich für künstlerische Leitung (allgemein, z. B. Festivalleitung). | Festspielleitung / Regie (allgemein) |
 | `rdau:P60406` | literal or reference to Agent | min 0, max unbounded | „hat Geehrte*n/Preisträger*in“ – Person, die durch die Ressource geehrt wird. | Geehrte_r / Preisträger_in |
 | `rdau:P60410` | literal or reference to Agent | min 0, max unbounded | „hat Stecher“ – Person, die durch Gravur Druckvorlagen herstellt. | Stecher_in |
 | `rdau:P60412` | literal or reference to Agent | min 0, max unbounded | „hat Druckgrafiker“ – Person, die Druckplatten (Hoch-, Tief-, Flachdruck) herstellt. | Grafiker_in (Druckgrafik) |
@@ -208,6 +211,7 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | `rdau:P60424` | literal or reference to Agent | min 0, max unbounded | „hat Designer“ – Verantwortlich für das Design eines Objekts. | Designer_in |
 | `rdau:P60426` | literal or reference to Agent | min 0, max unbounded | „hat Komponist“ – Verantwortlich für eine musikalische Ressource. | Komponist_in |
 | `rdau:P60429` | literal or reference to Agent | min 0, max unbounded | „hat Fotograf“ – Verantwortlich für ein fotografisches Werk. | Fotograf_in |
+| `rdau:P60678` | literal or reference to Agent | min 0, max unbounded | „hat Kameramann/-frau (Director of Photography)“ – Verantwortlich für Kameraarbeit/Bildgestaltung in Film/Video. | Kameramann/-frau |
 | `rdau:P60430` | literal or reference to Agent | min 0, max unbounded | „hat Interviewer“ – Führt Interviews/Erhebungen/Reporterarbeiten durch. | Interviewer_in |
 | `rdau:P60431` | literal or reference to Agent | min 0, max unbounded | „hat Künstler“ – Verantwortlich für grafische/zeichnerische/ malerische Werke. | Künstler_in |
 | `rdau:P60432` | literal or reference to Agent | min 0, max unbounded | „hat Interviewte*n“ – Person, die auf ein Interview antwortet. | Interviewte Person / Interviewpartner_in |
