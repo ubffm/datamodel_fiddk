@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import luigi
-import pytest
 
 from fiddk_validator.luigi_tasks import ValidateRDFTask
 
