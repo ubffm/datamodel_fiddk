@@ -170,11 +170,6 @@ fiddk-sh:ProvidedCHOShape
         sh:minCount 0 ;
     ] ;
 
-    # Herausgeber_in
-    sh:property [
-        sh:path rdau:P60393 ;
-        sh:minCount 0 ;
-    ] ;
 
     # Bild-Beitragende (Illustrator_in)
     sh:property [
@@ -392,7 +387,7 @@ fiddk-sh:ProvidedCHOShape
         sh:minCount 0 ;
     ] ;
 
-    # Texteditor_in (Redakteur_in)
+    # Herausgeber_in / Editor_in (Redakteur_in)
     sh:property [
         sh:path rdau:P61085 ;
         sh:minCount 0 ;

@@ -197,7 +197,6 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (ProvidedCHO)
 | `rdau:P60384` | literal or reference to Agent | min 0, max unbounded | „hat Kostümgestaltung“ – Verantwortlich für die Gestaltung/Ausführung von Kostümen. | Kostümgestaltung |
 | `rdau:P60385` | literal or reference to Agent | min 0, max unbounded | „hat Übersetzer“ – Person, die sprachliche Inhalte einer Ressource in eine andere Sprache überträgt. | Übersetzer_in |
 | `rdau:P60387` | literal or reference to Agent | min 0, max unbounded | „hat Performer“ – Person, die Musik, Schauspiel, Tanz, Sprache usw. performt. | Performer_in |
-| `rdau:P60393` | literal or reference to Agent | min 0, max unbounded | „hat Herausgeber“ – Person, die Inhalte überarbeitet, zusammenstellt oder klärt. | Herausgeber_in (Achtung: siehe `rdau:P61085`) |
 | `rdau:P60396` | literal or reference to Agent | min 0, max unbounded | „hat Bild-Beitragende“ – ergänzt Inhalte durch Zeichnungen, Fotos, Diagramme usw. | Illustrator_in |
 | `rdau:P60397` | literal or reference to Agent | min 0, max unbounded | „hat Aufnahmeleitende/Recordist“ – Person, die Ton/Video aufnimmt, inkl. Feldaufnahmen. | Kameramann_frau / Aufnahme / Tonmann_frau |
 | `rdau:P60399` | literal or reference to Agent | min 0, max unbounded | „hat Theaterregisseur“ – Verantwortlich für die Leitung einer Bühnenproduktion. | Theaterregisseur_in (für Film: `rdau:P60084`) |
@@ -334,13 +333,13 @@ Hier auf Basis von `edm:Agent`, im Original EDM gibt es `foaf:Person` in der For
 Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
 - Namensführung über `skos:prefLabel`/`skos:altLabel`; `foaf:name` wird nicht verwendet.
 - Personenbezogene Eigenschaften sind auf RDAU gemappt (anstatt rdaGr2); `edm:begin`/`edm:end` werden für Personen nicht genutzt.
-- Zusätze im FID DK: `rdau:P60095` (Affiliation) und `foaf:depiction` für ein Personenbild.
+- Zusätze im FID DK: `rdau:P60679` (Beschäftigung/has employer), ggf. `rdau:P60648` (Mitgliedschaft/is member of), und `foaf:depiction` für ein Personenbild.
 
 | Properties | Value type | Cardinality | EDM Note (Deutsch) | FID DK Note |
 |-----------|------------|-------------|---------------------|------------|
 | `skos:prefLabel` | literal | min 0, max 1 per lang tag | Die bevorzugte Namensform des Agenten. Obwohl die maximale Anzahl auf 1 gesetzt ist, gilt dies als 1 **pro Sprach-Tag**. Mindestens ein `skos:prefLabel` SOLLTE angegeben werden. Mehrere Labels mit Sprachkennzeichnung werden für Varianten und Übersetzungen dringend empfohlen. `<skos:prefLabel xml:lang="fr">Courtois neveu aîné</skos:prefLabel>` `<skos:prefLabel xml:lang="en">Courtois’ eldest nephew</skos:prefLabel>` | voller bevorzugter Name … |
 | `skos:altLabel` | literal | min 0, max unbounded | Alternative Namensformen des Agenten. Dieses Property wird empfohlen. `<skos:altLabel xml:lang="en">Courtois</skos:altLabel>` `<skos:altLabel xml:lang="fr">Augte. Courtois aîné</skos:altLabel>` | Namensvarianten; auch Pseudonyme … |
-| `skos:note` | literal | min 0, max unbounded | Eine Anmerkung zur Person, z. B. biografische Hinweise. `<skos:note>Courtois neveu aîné started a company ...</skos:note>` | `rdau:P60492` bevorzugt |
+| `skos:note` | literal | min 0, max unbounded | Eine Anmerkung zur Person, z. B. biografische Hinweise. `<skos:note>Courtois neveu aîné started a company ...</skos:note>` | bevorzugt `rdau:P60484` (has agent history) oder `rdau:P60956` (has note on agent) |
 | `dc:date` | literal or reference to TimeSpan | min 0, max unbounded | Ein bedeutendes Datum, das mit der Person assoziiert ist. Europeana empfiehlt ISO-8601-Format (YYYY-MM-DD). `<dc:date>1803</dc:date>` | Mit der Person assoziiertes Datum … |
 | `dc:identifier` | literal | min 0, max unbounded | Eine Kennung der Person. `<dc:identifier>http://viaf.org/viaf/96994048</dc:identifier>` | Weitere lokale Identifier |
 | ~~`edm:begin`~~ | ~~literal~~ | ~~min 0, max 1~~ | ~~Geburtsdatum/Gründungsdatum der Person/Organisation. ISO-8601 empfohlen.~~ | … |
@@ -364,7 +363,8 @@ Hinweis: Abweichungen zu den EDM-Mapping-Guidelines (Person)
 
 Properties | Value type | Cardinality | FIDDK Note
 ------------|------------|------------|------------
-`rdau:P60095` | reference to Agent (Orga) | min 0, max unbounded | "has affiliation", Affiliation, Beziehung einer Person zu einer Organisation (Anstellung, Mitglied, ...)
+`rdau:P60679` | reference to Agent (Orga) | min 0, max unbounded | "has employer", Beschäftigungsverhältnis; Beziehung einer Person zu einem Arbeitgeber
+`rdau:P60648` | reference to Agent (Orga) | min 0, max unbounded | "is member of", Mitgliedschaft in einer Organisation/Gruppe
 `foaf:depiction` | reference | min 0, max 1 | Referenz zu einem Bild der Person
 
 <a id="foaf-organization"></a>
