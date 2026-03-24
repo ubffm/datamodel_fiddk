@@ -142,7 +142,7 @@ fiddk-sh:ProvidedCHOShape
 
     # Musikalische Supervision
     sh:property [
-        sh:path rdau:P60611 ;
+        sh:path rdau:P60383 ;
         sh:minCount 0 ;
     ] ;
 
@@ -154,7 +154,7 @@ fiddk-sh:ProvidedCHOShape
 
     # Kostümgestaltung
     sh:property [
-        sh:path rdau:P60612 ;
+        sh:path rdau:P60384 ;
         sh:minCount 0 ;
     ] ;
 
@@ -196,7 +196,7 @@ fiddk-sh:ProvidedCHOShape
 
     # Festspielleitung
     sh:property [
-        sh:path rdau:P60673 ;
+        sh:path rdau:P60449 ;
         sh:minCount 0 ;
     ] ;
 
@@ -256,7 +256,7 @@ fiddk-sh:ProvidedCHOShape
 
     # Kameramann/-frau (Director of Photography)
     sh:property [
-        sh:path rdau:P60678 ;
+        sh:path rdau:P60452 ;
         sh:minCount 0 ;
     ] ;
 
