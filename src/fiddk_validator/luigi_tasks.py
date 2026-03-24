@@ -23,6 +23,49 @@ class ValidateRDFTask(luigi.Task):
   def output(self):
     return luigi.LocalTarget(self.report_path)
 
+  def complete(self):
+    path = Path(self.report_path)
+    if not path.exists():
+      return False
+
+    # Ohne strenge Behandlung reicht die Existenz des Outputs.
+    if not self.fail_on_violation:
+      return True
+
+    # Streng: nur komplett, wenn sh:conforms == true.
+    try:
+      # Bevorzugt Textreport auswerten
+      if self.write_text_report:
+        txt = path.with_suffix(".txt")
+        if txt.exists():
+          content = txt.read_text(encoding="utf-8").lower()
+          if "conforms: true" in content:
+            return True
+          return False
+
+      # Fallback: RDF-Report parsen und sh:conforms prüfen
+      from rdflib import Graph, Namespace
+      from rdflib.namespace import RDF
+      SH = Namespace("http://www.w3.org/ns/shacl#")
+
+      g = Graph()
+      fmt = _resolve_format(path, None) or "turtle"
+      g.parse(str(path), format=fmt)
+
+      for rep in g.subjects(RDF.type, SH.ValidationReport):
+        for val in g.objects(rep, SH.conforms):
+          try:
+            if bool(val.toPython()):
+              return True
+            return False
+          except Exception:
+            return str(val).strip().lower() == "true"
+
+      # Keine Aussage gefunden → sicherheitshalber nicht komplett
+      return False
+    except Exception:
+      return False
+
   def run(self):
     conforms, results_graph, results_text = validate(
       data_path=self.data_path,
