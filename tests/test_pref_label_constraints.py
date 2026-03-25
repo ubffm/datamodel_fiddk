@@ -24,8 +24,7 @@ def test_two_pref_labels_without_lang_tag_fails(tmp_path: Path) -> None:
     )
 
     assert conforms is False, (
-        "Erwartet: nicht konform (2 prefLabel ohne Sprach-Tag).\n"
-        f"Report:\n{results_text}"
+        f"Erwartet: nicht konform (2 prefLabel ohne Sprach-Tag).\nReport:\n{results_text}"
     )
 
 
@@ -50,6 +49,5 @@ def test_two_pref_labels_same_language_tag_fails(tmp_path: Path) -> None:
     )
 
     assert conforms is False, (
-        "Erwartet: nicht konform (2 prefLabel mit de-Sprach-Tag).\n"
-        f"Report:\n{results_text}"
+        f"Erwartet: nicht konform (2 prefLabel mit de-Sprach-Tag).\nReport:\n{results_text}"
     )
