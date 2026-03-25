@@ -28,7 +28,7 @@ def main(argv: list[str] | None = None) -> None:
   parser.add_argument(
     "--inference",
     choices=["none", "rdfs", "owlrl"],
-    default="rdfs",
+    default="none",
     help="Inferenztiefe für pySHACL",
   )
   parser.add_argument("--no-text", action="store_true", help="Keinen Text-Report erzeugen (.txt)")

@@ -14,7 +14,7 @@ class ValidateRDFTask(luigi.Task):
     data_format = luigi.OptionalParameter(default=None)
     shacl_format = luigi.OptionalParameter(default=None)
     report_format = luigi.OptionalParameter(default=None)
-    inference = luigi.Parameter(default="rdfs")
+    inference = luigi.Parameter(default="none")
     advanced = luigi.BoolParameter(default=False)
     debug = luigi.BoolParameter(default=False)
     write_text_report = luigi.BoolParameter(default=True)

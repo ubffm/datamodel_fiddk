@@ -24,7 +24,7 @@ def validate(
   shacl_path: Pathish | None = None,
   data_format: str | None = None,
   shacl_format: str | None = None,
-  inference: str = "rdfs",
+  inference: str = "none",
   advanced: bool = False,
   debug: bool = False,
 ) -> tuple[bool, Graph, str]:
@@ -74,7 +74,7 @@ def validate_to_files(
   data_format: str | None = None,
   shacl_format: str | None = None,
   report_format: str | None = None,
-  inference: str = "rdfs",
+  inference: str = "none",
   advanced: bool = False,
   debug: bool = False,
   write_text_report: bool = True,
