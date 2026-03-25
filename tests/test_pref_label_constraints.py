@@ -51,3 +51,29 @@ def test_two_pref_labels_same_language_tag_fails(tmp_path: Path) -> None:
     assert conforms is False, (
         f"Erwartet: nicht konform (2 prefLabel mit de-Sprach-Tag).\nReport:\n{results_text}"
     )
+
+
+def test_two_pref_labels_different_language_tags_conforms(tmp_path: Path) -> None:
+    data = """
+    @prefix ex:   <http://example.org/> .
+    @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+    ex:c a skos:Concept ;
+        skos:prefLabel "Label"@de ;
+        skos:prefLabel "Label"@en .
+    """
+    data_path = tmp_path / "concept_two_langs.ttl"
+    data_path.write_text(data, encoding="utf-8")
+
+    conforms, _results_graph, results_text = validate(
+        data_path=data_path,
+        shacl_path=None,
+        inference="none",
+        advanced=False,
+        debug=False,
+    )
+
+    assert conforms is True, (
+        "Erwartet: konform (2 prefLabel mit unterschiedlichen Sprach-Tags).\n"
+        f"Report:\n{results_text}"
+    )
