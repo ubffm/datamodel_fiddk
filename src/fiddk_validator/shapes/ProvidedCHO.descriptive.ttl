@@ -231,18 +231,15 @@ fiddk-sh:ProvidedCHOShape
     #################################################################
     # Regel: Wenn edm:type = "TEXT", dann muss mind. eine dc:language vorhanden sein
     #################################################################
-    sh:sparql [
-        a sh:SPARQLConstraint ;
-        sh:message "Für Objekte mit edm:type = \"TEXT\" muss mindestens eine dc:language angegeben sein."@de ;
-        sh:select """
-          PREFIX dc:   <http://purl.org/dc/elements/1.1/>
-          PREFIX edm:  <http://www.europeana.eu/schemas/edm/>
-
-          SELECT $this
-          WHERE {
-            $this edm:type ?t .
-            FILTER(STR(?t) = "TEXT")
-            FILTER NOT EXISTS { $this dc:language ?lang }
-          }
-        """
-    ] .
+    sh:or (
+        [ sh:not [
+            sh:property [
+                sh:path edm:type ;
+                sh:hasValue "TEXT" ;
+            ]
+        ] ]
+        [ sh:property [
+            sh:path dc:language ;
+            sh:minCount 1 ;
+        ] ]
+    ) .
